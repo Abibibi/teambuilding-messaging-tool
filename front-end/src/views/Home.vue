@@ -2,7 +2,13 @@
   <div>
     <Header />
     <div class="home">
-      Coucou
+      <p class ="home-concept">Témoignez de la reconnaissance envers vos collègues <br> de façon anonyme <br> <span class="home-concept-end">et recevez-en.</span></p>
+      <div class="home-form-link home-form-link-register">
+        <a class="home-form-link-a">Inscrivez-vous</a>
+      </div>
+      <div class="home-form-link">
+        <a class="home-form-link-a">Connectez-vous</a>
+      </div>
     </div>
     <Footer />
   </div>

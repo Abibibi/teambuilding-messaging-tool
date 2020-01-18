@@ -2,9 +2,51 @@
     @include responsive(phone)
         background-color: $headerNavFooterGray
         position: absolute
-        bottom: 0
-        top: 5rem
+        top: 6rem
+        bottom: 5rem
         width: 100%
+        display: flex
+        justify-content: center
+        flex-direction: column
+        text-align: center
+        font-size: 1.3em
 
     @include responsive(tab-land)
         top: 7rem
+        bottom: 6rem
+
+    &-concept
+        @include responsive(phone)
+            width: 20rem
+            margin: 0 auto
+            padding-bottom: 4rem
+            font-size: .9em
+
+        @include responsive(tab-land)
+            width: 25rem
+            margin: 0 auto
+            font-size: 1.2em
+
+        &-end
+            color: $darkSeafoam
+    
+    &-form
+
+        &-link
+            @include responsive(phone)
+                font-size: .8em
+
+            @include responsive(tab-land)
+                font-size: .9em
+        
+            &-register
+                margin-bottom: .5em
+        
+            &-a
+                text-decoration: underline
+                cursor: pointer
+
+                &:hover
+                    color: $darkSeafoam
+
+            

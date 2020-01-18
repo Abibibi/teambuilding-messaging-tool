@@ -1,11 +1,3 @@
 <template>
-  <footer>
-
-  </footer>
+  <footer class="footer"><p>© 2020 Gratitude</p></footer>
 </template>
-
-<script>
-export default {
-
-}
-</script>

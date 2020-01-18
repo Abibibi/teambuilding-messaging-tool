@@ -1,17 +1,17 @@
 <template>
   <div>
-    <header class="home-header">
-      <a class="home-header-websitename">Gratitude</a>
-      <nav class="home-header-nav">
-        <a href="#" class="home-header-nav-a home-header-nav-a-register">S'inscrire</a>
-        <a href="#" class="home-header-nav-a">S'identifier</a>
-      </nav>
-    </header>
+    <Header />
   </div>
 </template>
 
 <script>
+
+import Header from '@/components/Header.vue'
+
 export default {
+  components: {
+    Header
+  },
   mounted () {
     document.title = 'Gratitude'
   }

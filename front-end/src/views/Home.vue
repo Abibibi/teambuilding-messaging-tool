@@ -1,6 +1,9 @@
 <template>
   <div>
     <Header />
+    <div class="home">
+      Coucou
+    </div>
   </div>
 </template>
 

@@ -1,12 +1,10 @@
 <template>
   <div>
     <header class="home-header">
-      <div class="home-header-logo">
-        <img>
-      </div>
+      <a class="home-header-websitename">Gratitude</a>
       <nav class="home-header-nav">
-        <a href="#">S'inscrire</a>
-        <a href="#">S'identifier</a>
+        <a href="#" class="home-header-nav-a home-header-nav-a-register">S'inscrire</a>
+        <a href="#" class="home-header-nav-a">S'identifier</a>
       </nav>
     </header>
   </div>

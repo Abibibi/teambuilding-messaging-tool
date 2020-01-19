@@ -1,3 +1,5 @@
 export default {
-  logged: true
+  logged: true,
+  messagesReceived: false,
+  messagesSent: true
 }

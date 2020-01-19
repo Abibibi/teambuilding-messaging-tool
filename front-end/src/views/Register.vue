@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <div class="content">
+    <div class="unlogged-content">
       <h1 class="form-title">Inscription</h1>
       <form class="form-form">
         <Field
@@ -33,7 +33,7 @@
           labelText="Confirmez le mot de passe"
         />
         <Button />
-        <router-link to="/connexion" class="form-question">Déjà membre ? Connectez-vous</router-link>
+        <router-link to="/connexion" class="form-question form-question-register">Déjà membre ? Connectez-vous</router-link>
       </form>
     </div>
     <Footer />

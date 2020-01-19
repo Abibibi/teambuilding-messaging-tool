@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import Register from '@/views/Register.vue'
 import Login from '@/views/Login.vue'
+import Spaces from '@/views/Spaces.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/connexion',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/espaces',
+    name: 'spaces',
+    component: Spaces
   }
 ]
 

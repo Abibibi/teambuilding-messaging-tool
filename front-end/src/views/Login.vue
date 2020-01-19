@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <div class="content">
+    <div class="unlogged-content">
       <h1 class="form-title">Connexion</h1>
       <form class="form-form">
         <Field

@@ -1,3 +1,8 @@
+html
+    @include responsive(tab-land)
+        min-height: 100%
+        position: relative
+
 body
     margin: 0
     background-color: $backgroundContentGray
@@ -10,9 +15,12 @@ body
     @include responsive(phone)
         background-color: $backgroundContentGray
         width: 100%
-        padding: 7rem 0
+        padding: 5rem 0
         display: flex
         justify-content: center
         flex-direction: column
         text-align: center
         font-size: 1.3em
+
+    @include responsive(tab-land)
+        padding: 7rem 0 10rem

@@ -1,9 +1,3 @@
 <template>
-
+  <button class="button">Ok</button>
 </template>
-
-<script>
-export default {
-
-}
-</script>

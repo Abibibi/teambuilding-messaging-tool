@@ -1,0 +1,39 @@
+.home
+
+    &-concept
+        @include responsive(phone)
+            width: 20rem
+            margin: 5rem auto 0
+            padding-bottom: 4rem
+            font-size: .9em
+
+        @include responsive(tab-land)
+            width: 25rem
+            margin: 7rem auto 0
+            font-size: 1.2em
+
+        &-end
+            color: $darkSeafoam
+    
+    &-form
+
+        &-link
+            @include responsive(phone)
+                font-size: .8em
+
+            @include responsive(tab-land)
+                font-size: .9em
+        
+            &-register
+                margin-bottom: .5em
+        
+            &-a
+                text-decoration: underline
+                cursor: pointer
+                
+                &:hover, &:active, &:visited
+                    color: $darkSeafoam
+
+                
+
+            

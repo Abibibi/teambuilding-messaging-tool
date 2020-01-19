@@ -1,7 +1,7 @@
 <template>
   <div class="field-content">
     <input
-      class="field-content-input"
+      :class="inputClassName"
       :type="type"
       :name="nameIdFor"
       :id="nameIdFor"
@@ -9,10 +9,11 @@
       ref="input"
       @focus="textBlackLabelUp"
       v-model="inputVal"
+      @change="onSelect"
       required
     >
     <label
-      class="field-content-label"
+      :class="labelClassName"
       :for="nameIdFor"
       ref="label"
     >
@@ -29,25 +30,19 @@ export default {
     nameIdForText: String,
     value: String,
     titleText: String,
-    labelText: String
+    inputClass: String,
+    labelText: String,
+    labelClass: String
   },
   data () {
     return {
       type: this.inputType,
       nameIdFor: this.nameIdForText,
       title: this.titleText,
-      label: this.labelText
-    }
-  },
-  methods: {
-    textBlackLabelUp () {
-      /* Input text is initially transparent (see rule for input in css)
-      to hide date input text (jj/mm/aaa), which is displayed by default.
-      With textInBlack function, input text turns black on focus
-      and is thus visible to the user */
-      this.$refs.input.classList.add('field-content-input-white')
-      /* to make label go up */
-      this.$refs.label.classList.add('field-content-label-animation')
+      inputClassName: this.inputClass,
+      label: this.labelText,
+      labelClassName: this.labelClass,
+      image: this.spaceImage
     }
   },
   computed: {
@@ -57,6 +52,21 @@ export default {
       },
       set (val) {
         this.$emit('input', val)
+      }
+    }
+  },
+  methods: {
+    textBlackLabelUp () {
+      if (this.type !== 'file') {
+        /* to make label go up */
+        this.$refs.label.classList.add('field-content-label-space-up', 'field-content-label-animation')
+      }
+    },
+    onSelect () {
+      if (this.type === 'file') {
+        this.image = this.$refs.input.files[0]
+        // to ensure two-way data binding
+        this.$emit('update:spaceImage', this.image)
       }
     }
   }

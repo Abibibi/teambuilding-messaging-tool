@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue'
 import Register from '@/views/Register.vue'
 import Login from '@/views/Login.vue'
 import Spaces from '@/views/Spaces.vue'
+import CreateSpace from '@/views/CreateSpace.vue'
 import ReceivedMessages from '@/views/ReceivedMessages.vue'
 import SentMessages from '@/views/SentMessages.vue'
 
@@ -41,6 +42,14 @@ const routes = [
       requiresAuth: true
     },
     component: Spaces
+  },
+  {
+    path: '/creer-un-espace',
+    name: 'create-space',
+    meta: {
+      requiresAuth: true
+    },
+    component: CreateSpace
   },
   {
     path: '/messages-recus',

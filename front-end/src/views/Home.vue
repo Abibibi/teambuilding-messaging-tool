@@ -4,10 +4,10 @@
     <div class="content">
       <p class ="home-concept">Témoignez de la reconnaissance envers vos collègues <br> de façon anonyme <br> <span class="home-concept-end">et recevez-en.</span></p>
       <div class="home-form-link home-form-link-register">
-        <a class="home-form-link-a">Inscrivez-vous</a>
+        <router-link to="/inscription" class="home-form-link-a">Inscrivez-vous</router-link>
       </div>
       <div class="home-form-link">
-        <a class="home-form-link-a">Connectez-vous</a>
+        <router-link to="/connexion" class="home-form-link-a">Connectez-vous</router-link>
       </div>
     </div>
     <Footer />

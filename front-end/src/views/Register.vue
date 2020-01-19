@@ -2,8 +2,8 @@
   <div>
     <Header />
     <div class="content">
-      <h1 class="register-title">Inscription</h1>
-      <form class="register-form">
+      <h1 class="form-title">Inscription</h1>
+      <form class="form-form">
         <Field
           inputType="text"
           nameIdForText="firstname"
@@ -33,6 +33,7 @@
           labelText="Confirmez le mot de passe"
         />
         <Button />
+        <router-link to="/connexion" class="form-question">Déjà membre ? Connectez-vous</router-link>
       </form>
     </div>
     <Footer />

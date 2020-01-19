@@ -1,4 +1,4 @@
-.register
+.form
 
     &-title
         @include responsive(phone)
@@ -13,3 +13,13 @@
         display: flex
         flex-direction: column
         align-items: center
+
+    &-question
+        @include responsive(phone)
+            font-size: .6em
+            
+        @include responsive(tab-land)
+            font-size: .7em
+
+        &:hover, &:active, &:visited
+            color: $darkSeafoam

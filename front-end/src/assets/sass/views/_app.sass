@@ -1,0 +1,18 @@
+body
+    margin: 0
+    background-color: $backgroundContentGray
+    color: $contentWhite
+
+#app
+    font-family: $content
+
+.content
+    @include responsive(phone)
+        background-color: $backgroundContentGray
+        width: 100%
+        padding-top: 7rem
+        display: flex
+        justify-content: center
+        flex-direction: column
+        text-align: center
+        font-size: 1.3em

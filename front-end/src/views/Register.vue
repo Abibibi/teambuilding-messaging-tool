@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <div class="unlogged-content">
+    <div class="content-container content-container-unlogged">
       <h1 class="form-title">Inscription</h1>
       <form class="form-form">
         <Field

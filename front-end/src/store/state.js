@@ -1,3 +1,3 @@
 export default {
-  logged: false
+  logged: true
 }

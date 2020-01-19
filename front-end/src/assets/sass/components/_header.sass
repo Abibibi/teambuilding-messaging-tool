@@ -45,10 +45,14 @@
                 font-size: 1.2em
                 color: $white
                 text-decoration: none
+                margin: 0 0.6rem
 
                 &:hover
                     color: $seafoam
+            
+            @include responsive(tab-land)
+                margin: 0
 
                 &-margin
                     @include responsive(tab-land)
-                        margin-right: 3rem
+                        margin: 0 3rem 0 0

@@ -14,19 +14,41 @@ body
 #app
     font-family: $content
 
-.unlogged
+.content
     
-    &-content
+    &-container
         @include responsive(phone)
             background-color: $backgroundContentGray
             width: 100%
             padding: 6rem 0
-            scroll-margin: 6rem 0
             display: flex
-            justify-content: center
-            flex-direction: column
-            text-align: center
             font-size: 1.3em
             
         @include responsive(tab-land)
             padding: 7rem 0 10rem
+
+        &-unlogged
+            @include responsive(phone)
+                justify-content: center
+                flex-direction: column
+                text-align: center
+        
+        &-logged
+            @include responsive(phone)
+                flex-direction: column
+                width: 95%
+                margin: 0 auto
+
+        &-loggedtitle
+            @include responsive(phone)
+                text-align: center
+                font-size: 1.5rem
+                margin: 1.5rem 0 .8rem
+            
+            @include responsive(tab-land)
+                font-size: 2rem
+                margin: 2.5rem 0 1.5rem
+        
+        
+    
+    

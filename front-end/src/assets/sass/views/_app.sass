@@ -54,13 +54,36 @@ body
             @include responsive(tab-land)
                 font-size: 2rem
                 margin: 2.5rem 0 1.5rem
-        
-    &-paragraph
-        margin: 0
 
     &-link
 
         &:hover, &:active, &:visited
             color: $darkSeafoam
+
+    &-joining
+    
+        &-paragraph
+
+            @include responsive(phone)
+                margin: .3rem 0
+                font-size: 1.1rem
+
+            @include responsive(tab-land)
+                margin: .3rem 0
+                font-size: 1.2rem
+
+            &-top
+                @include responsive(phone)
+                    margin-top: 2rem
+
+                @include responsive(tab-land)
+                    margin-top: 1.5rem
+
+            &-bottom
+                @include responsive(phone)
+                    margin-bottom: 2rem
+
+                @include responsive(tab-land)
+                    margin-bottom: 1rem
     
     

@@ -1,7 +1,7 @@
 export default {
-  logged: false,
-  joinedSpace: false,
-  joiningWhileUnlogged: true,
+  logged: true,
+  joinedSpace: true,
+  joiningWhileUnlogged: false,
   tryToJoin: true,
   messagesReceived: false,
   messagesSent: true,

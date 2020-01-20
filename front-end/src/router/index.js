@@ -6,6 +6,7 @@ import Login from '@/views/Login.vue'
 import Spaces from '@/views/Spaces.vue'
 import CreateSpace from '@/views/CreateSpace.vue'
 import AcceptSpace from '@/views/AcceptSpace.vue'
+import ConfirmedSpace from '@/views/ConfirmedSpace.vue'
 import ReceivedMessages from '@/views/ReceivedMessages.vue'
 import SentMessages from '@/views/SentMessages.vue'
 
@@ -56,6 +57,14 @@ const routes = [
     path: '/accepter-espace-:espace',
     name: 'accept-space',
     component: AcceptSpace
+  },
+  {
+    path: '/confirmation-adhesion-:espace',
+    name: 'confirmed-space',
+    meta: {
+      requiresAuth: true
+    },
+    component: ConfirmedSpace
   },
   {
     path: '/:espace/messages-recus',

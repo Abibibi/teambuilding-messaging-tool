@@ -25,6 +25,12 @@
           />
           <Button />
         </form>
+        <div v-if="createdSpace" class="content-container-logged-middle">
+          <p>L'espace Bla a bien été créé. Vous pouvez le retrouver en cliquant sur la carte ci-dessous :</p>
+          <SpaceCard />
+          <p>Vous pouvez également inviter vos collègues à vous rejoindre dans l'espace en leur communiquant ce lien :</p>
+          <router-link to="/accepter-espace-bla" class="home-form-link-a">Espace Bla</router-link>
+        </div>
       </div>
     <Footer />
   </div>
@@ -34,13 +40,16 @@
 
 import Header from '@/components/Header.vue'
 import Field from '@/components/Field.vue'
+import SpaceCard from '@/components/SpaceCard.vue'
 import Button from '@/components/Button.vue'
 import Footer from '@/components/Footer.vue'
+import { mapState } from 'vuex'
 
 export default {
   components: {
     Header,
     Field,
+    SpaceCard,
     Button,
     Footer
   },
@@ -52,8 +61,15 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState([
+      'createdSpace'
+    ])
+  },
   methods: {
     handleSubmit () {
+      // information updated by Child component (Field) through two-way data binding
+      // (with v-model for space.name and "update" event for space.image)
       console.log(this.space.name)
       console.log(this.space.image)
     }

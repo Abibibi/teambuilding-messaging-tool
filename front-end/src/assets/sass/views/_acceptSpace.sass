@@ -1,0 +1,41 @@
+.accept
+
+    &-space
+
+        &-button
+            @include responsive(phone)
+                border-radius: 1.3rem
+                margin: .3rem 0
+                width: 7rem
+                height: 2.5rem
+                font-size: 1rem
+            
+            @include responsive(tab-land)
+                margin: 1.2rem 0
+                width: 10rem
+                height: 3rem
+
+    &-paragraph
+
+        @include responsive(phone)
+            margin: .3rem 0
+            font-size: 1.1rem
+
+        @include responsive(tab-land)
+            margin: .3rem 0
+            font-size: 1.2rem
+
+        &-top
+            @include responsive(phone)
+                margin-top: 2rem
+
+            @include responsive(tab-land)
+                margin-top: 1.5rem
+
+        &-bottom
+            @include responsive(phone)
+                margin-bottom: 2rem
+
+            @include responsive(tab-land)
+                margin-bottom: 1rem
+            

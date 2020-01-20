@@ -5,6 +5,7 @@ import Register from '@/views/Register.vue'
 import Login from '@/views/Login.vue'
 import Spaces from '@/views/Spaces.vue'
 import CreateSpace from '@/views/CreateSpace.vue'
+import AcceptSpace from '@/views/AcceptSpace.vue'
 import ReceivedMessages from '@/views/ReceivedMessages.vue'
 import SentMessages from '@/views/SentMessages.vue'
 
@@ -36,8 +37,8 @@ const routes = [
     component: Login
   },
   {
-    path: '/espaces',
-    name: 'spaces',
+    path: '/mes-espaces',
+    name: 'my-spaces',
     meta: {
       requiresAuth: true
     },
@@ -52,7 +53,12 @@ const routes = [
     component: CreateSpace
   },
   {
-    path: '/messages-recus',
+    path: '/accepter-espace-:espace',
+    name: 'accept-space',
+    component: AcceptSpace
+  },
+  {
+    path: '/:espace/messages-recus',
     name: 'received-messages',
     meta: {
       requiresAuth: true
@@ -60,7 +66,7 @@ const routes = [
     component: ReceivedMessages
   },
   {
-    path: '/messages-envoyes',
+    path: '/:espace/messages-envoyes',
     name: 'sent-messages',
     meta: {
       requiresAuth: true

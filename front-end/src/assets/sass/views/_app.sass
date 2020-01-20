@@ -39,6 +39,12 @@ body
                 width: 95%
                 margin: 0 auto
 
+                &-middle
+                    display: flex
+                    flex-direction: column
+                    align-items: center
+                    text-align: center
+
         &-loggedtitle
             @include responsive(phone)
                 text-align: center
@@ -49,6 +55,12 @@ body
                 font-size: 2rem
                 margin: 2.5rem 0 1.5rem
         
-        
+    &-paragraph
+        margin: 0
+
+    &-link
+
+        &:hover, &:active, &:visited
+            color: $darkSeafoam
     
     

@@ -48,7 +48,7 @@ export default {
     return {
       space: {
         name: '',
-        image: {}
+        image: {} // File type of data
       }
     }
   },

@@ -23,7 +23,7 @@
           labelClass="field-content-label"
         />
         <Button />
-        <router-link to="/inscription" class="form-question">Première visite ? Inscrivez-vous</router-link>
+        <router-link to="/inscription" class="content-link form-question">Première visite ? Inscrivez-vous</router-link>
       </form>
     </div>
     <Footer />

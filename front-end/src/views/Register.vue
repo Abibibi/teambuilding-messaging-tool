@@ -41,7 +41,7 @@
           labelClass="field-content-label"
         />
         <Button />
-        <router-link to="/connexion" class="form-question form-question-register">Déjà membre ? Connectez-vous</router-link>
+        <router-link to="/connexion" class="content-link form-question form-question-register">Déjà membre ? Connectez-vous</router-link>
       </form>
     </div>
     <Footer />

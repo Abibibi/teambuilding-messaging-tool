@@ -11,7 +11,11 @@
       v-model="inputVal"
       @change="onSelect"
       required
+      :list="list"
     >
+    <datalist v-if="list" id="allMembers" >
+      <option v-for="({ id, firstname }) in membersToDisplay" :key="id">{{ firstname }}</option>
+    </datalist>
     <label
       :class="labelClassName"
       :for="nameIdFor"
@@ -29,15 +33,18 @@ export default {
     inputType: String,
     nameIdForText: String,
     value: String,
+    listText: String,
     titleText: String,
     inputClass: String,
     labelText: String,
-    labelClass: String
+    labelClass: String,
+    membersCaught: Array
   },
   data () {
     return {
       type: this.inputType,
       nameIdFor: this.nameIdForText,
+      list: this.listText,
       title: this.titleText,
       inputClassName: this.inputClass,
       label: this.labelText,
@@ -53,6 +60,9 @@ export default {
       set (val) {
         this.$emit('input', val)
       }
+    },
+    membersToDisplay () {
+      return this.membersCaught
     }
   },
   methods: {

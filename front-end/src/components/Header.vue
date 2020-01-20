@@ -8,9 +8,9 @@
       <router-link to="/mes-espaces" v-show="logged && !space" class="header-nav-a header-nav-a-margin">Mes espaces</router-link>
       <router-link to="/creer-un-espace" v-show="logged &&!space" class="header-nav-a header-nav-a-margin">Créer un espace</router-link>
       <router-link to="#" v-show="logged &&!space" class="header-nav-a">Déconnexion</router-link>
-      <router-link to="/messages-recus" v-show="logged &&space" class="header-nav-a header-nav-a-margin">Messages reçus</router-link>
-      <router-link to="/messages-envoyes" v-show="logged &&space" class="header-nav-a header-nav-a-margin">Messages envoyés</router-link>
-      <router-link to="#" v-show="logged &&space" class="header-nav-a">Envoyer un message</router-link>
+      <router-link to="/espace/messages-recus" v-show="logged &&space" class="header-nav-a header-nav-a-margin">Messages reçus</router-link>
+      <router-link to="/espace/messages-envoyes" v-show="logged &&space" class="header-nav-a header-nav-a-margin">Messages envoyés</router-link>
+      <router-link to="/espace/envoyer-message" v-show="logged &&space" class="header-nav-a">Envoyer un message</router-link>
     </nav>
   </header>
 </template>

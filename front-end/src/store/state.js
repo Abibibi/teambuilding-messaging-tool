@@ -3,7 +3,11 @@ export default {
   joinedSpace: true,
   joiningWhileUnlogged: false,
   tryToJoin: true,
+  space: true,
   messagesReceived: false,
   messagesSent: true,
-  space: true
+  spaceMembers: [{
+    id: 1,
+    firstname: 'Abi'
+  }]
 }

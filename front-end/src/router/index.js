@@ -9,6 +9,7 @@ import AcceptSpace from '@/views/AcceptSpace.vue'
 import ConfirmedSpace from '@/views/ConfirmedSpace.vue'
 import ReceivedMessages from '@/views/ReceivedMessages.vue'
 import SentMessages from '@/views/SentMessages.vue'
+import SendMessage from '@/views/SendMessage.vue'
 
 Vue.use(VueRouter)
 
@@ -81,6 +82,14 @@ const routes = [
       requiresAuth: true
     },
     component: SentMessages
+  },
+  {
+    path: '/:espace/envoyer-message',
+    name: 'send-message',
+    meta: {
+      requiresAuth: true
+    },
+    component: SendMessage
   }
 ]
 

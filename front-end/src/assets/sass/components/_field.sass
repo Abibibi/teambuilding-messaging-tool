@@ -5,17 +5,22 @@
     height: 4rem
 
     &-input
-      width: 13.7rem
-      height: 2.1rem
-      padding: 1.2rem 0 0
-      border: none
-      font-size: .9em
-      transition: padding .3s
-      // so jj/mm/aaaa default text in date input is not visible
-      background-color: transparent
-      color: $contentWhite
-      border-bottom: $white solid .05rem
-      outline: none
+      @include responsive(phone)
+        width: 13.7rem
+        height: 2.1rem
+        padding: 1.2rem 0 0
+        border: none
+        font-size: .9em
+        transition: padding .3s
+        // so jj/mm/aaaa default text in date input is not visible
+        background-color: transparent
+        color: $contentWhite
+        border-bottom: $white solid .05rem
+        outline: none
+
+      // to make datalist arrow visible
+      &::-webkit-calendar-picker-indicator
+        opacity: 100
 
       &-space
         padding: 0

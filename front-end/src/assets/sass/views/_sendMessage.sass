@@ -1,0 +1,50 @@
+.send
+
+    &-form
+        @include responsive(phone)
+            margin-top: .5rem
+
+        &-input
+            @include responsive(phone)
+                width: 17rem
+        
+            @include responsive(tab-land)
+                width: 49rem
+
+        &-textarea
+            text-align: left
+
+            &-title
+                @include responsive(phone)
+                    font-size: 1.1rem
+                
+                @include responsive(tab-land)
+                    font-size: 1.3rem
+
+            &-textarea
+                @include responsive(phone)
+                    border: none
+                    border-radius: .7rem
+                    padding: .6rem
+                    width: 16rem
+                    height: 10rem
+                    resize: none
+                    outline: none
+                    overflow: auto
+
+                @include responsive(tab-land)
+                    width: 48rem
+                    padding: .9rem
+    
+        &-button
+            @include responsive(phone)
+                border-radius: 1.3rem
+                margin: 1.5rem 0
+                width: 7rem
+                height: 2.5rem
+                font-size: 1rem
+                
+            @include responsive(tab-land)
+                margin: 2rem 0
+                width: 8rem
+                height: 3rem

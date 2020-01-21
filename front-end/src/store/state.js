@@ -1,4 +1,6 @@
 export default {
+  registerSuccess: false,
+  registerFail: false,
   logged: false,
   joinedSpace: false,
   joiningWhileUnlogged: false,

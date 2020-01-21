@@ -3,7 +3,7 @@
     <Header />
     <div class="content-container content-container-unlogged">
       <h1 class="form-title">Inscription</h1>
-      <form @submit.prevent="handleSubmit" class="form-form">
+      <form @submit.prevent="handleSubmit" class="form-form" ref="form">
         <Field
           inputType="text"
           nameIdForText="firstname"
@@ -31,7 +31,7 @@
           inputClass="field-content-input"
           labelClass="field-content-label"
         />
-        <p class="register-indication" v-if="indications.pwd" ref="pwdIndication">Le mot de passe doit comprendre au minimum 8 caractères.</p>
+        <p class="form-indication" ref="pwdIndication">Le mot de passe doit comprendre au minimum 8 caractères.</p>
         <Field
           inputType="password"
           nameIdForText="registerConfirmPassword"
@@ -41,9 +41,11 @@
           inputClass="field-content-input"
           labelClass="field-content-label"
         />
-        <p class="register-indication" v-if="indications.pwdEqualsConfirm" ref="confirmIndication">Les deux mots de passe doivent correspondre.</p>
+        <p class="form-indication" ref="confirmIndication">Les deux mots de passe doivent correspondre.</p>
         <Button />
         <router-link to="/connexion" class="content-link form-question form-question-register">Déjà membre ? Connectez-vous</router-link>
+        <p class="form-submission form-submission-success" v-if="registerSuccess && !registerFail">Inscription réussie</p>
+        <p class="form-submission form-submission-fail" v-if="registerFail && !registerSuccess">Compte déjà existant</p>
       </form>
     </div>
     <Footer />
@@ -56,6 +58,8 @@ import Header from '@/components/Header.vue'
 import Field from '@/components/Field.vue'
 import Button from '@/components/Button.vue'
 import Footer from '@/components/Footer.vue'
+
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -71,28 +75,43 @@ export default {
         email: '',
         password: '',
         confirmPassword: ''
-      },
-      indications: {
-        pwd: true,
-        pwdEqualsConfirm: true
       }
     }
   },
+  computed: {
+    ...mapState([
+      'registerSuccess',
+      'registerFail'
+    ])
+  },
   methods: {
+    ...mapActions([
+      'registering'
+    ]),
+
+    scrollToEnd () {
+      const form = this.$refs.form
+      form.scrollIntoView()
+    },
+
     handleSubmit (event) {
-      const { password, confirmPassword } = this.user
+      const { firstname, email, password, confirmPassword } = this.user
 
       if (password.length < 8) {
-        this.$refs.pwdIndication.classList.add('register-indication-error')
+        return this.$refs.pwdIndication.classList.add('form-indication-error')
       } else {
-        this.$refs.pwdIndication.classList.remove('register-indication-error')
+        this.$refs.pwdIndication.classList.remove('form-indication-error')
       }
 
       if (password !== confirmPassword) {
-        this.$refs.confirmIndication.classList.add('register-indication-error')
+        return this.$refs.confirmIndication.classList.add('form-indication-error')
       } else {
-        this.$refs.confirmIndication.classList.remove('register-indication-error')
+        this.$refs.confirmIndication.classList.remove('form-indication-error')
       }
+
+      this.registering({ firstname, email, password })
+
+      this.scrollToEnd()
     }
   },
   mounted () {

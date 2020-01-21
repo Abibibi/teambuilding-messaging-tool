@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 const signUp = async (req, res) => {
     const firstname = req.body.firstname;
     const email = req.body.email;
-    let password = req.body.signUpPassword;
+    let password = req.body.password;
 
     const promisePool = pool.promise();
 
@@ -21,8 +21,8 @@ const signUp = async (req, res) => {
     const tryingUser = results[0];
 
     // if user is already in DB (thus, has already signed up)
-    if(tryingUser) {
-      throw new Error('L\'utilisateur est déjà inscrit.')
+    if (tryingUser) {
+      return res.status(400).send({ alreadySignedUp: 'L\'utilisateur est déjà inscrit.' });
     }
   
     // if user not already in DB, adding them to DB
@@ -36,8 +36,7 @@ const signUp = async (req, res) => {
         [firstname, email, password]
     );
     
-    res.json('Inscription effectuée');
-      
+    return res.send('Inscription effectuée');  
   };
 
 

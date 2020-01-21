@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <div class="content">
+    <div class="content-container content-container-unlogged">
       <h1 class="form-title">Connexion</h1>
       <form class="form-form">
         <Field
@@ -10,6 +10,8 @@
           v-model="user.email"
           titleText="Saisissez votre e-mail"
           labelText="E-mail"
+          inputClass="field-content-input"
+          labelClass="field-content-label"
         />
         <Field
           inputType="password"
@@ -17,9 +19,11 @@
           v-model="user.password"
           titleText="Saisissez votre mot de passe"
           labelText="Mot de passe"
+          inputClass="field-content-input"
+          labelClass="field-content-label"
         />
         <Button />
-        <router-link to="/inscription" class="form-question">Première visite ? Inscrivez-vous</router-link>
+        <router-link to="/inscription" class="content-link form-question">Première visite ? Inscrivez-vous</router-link>
       </form>
     </div>
     <Footer />

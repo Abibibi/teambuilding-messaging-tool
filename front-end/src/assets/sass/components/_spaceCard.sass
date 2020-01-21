@@ -1,0 +1,38 @@
+.spacecard
+    @include responsive(phone)
+        width: 12rem
+        height: 11rem
+        background-color: $darkContentGray
+        border-radius: 1.2rem
+        margin: 0 0 1.7rem
+        display: flex
+        flex-direction: column
+        cursor: pointer
+
+    @include responsive(tab-land)
+        margin: 1rem
+    
+    &:active
+        position: relative
+        top: .2rem
+    
+    &:hover
+        background-color: $grayHover
+    
+    &-link
+        text-decoration: none
+        color: $white
+
+    &-spaceimage
+        max-width: 100%
+        max-height: 100%
+        border-radius: 1.2rem 1.2rem 0 0
+
+        &:hover
+            opacity: .5
+
+    &-spacename
+        @include responsive(phone)
+            text-align: center
+            text-decoration: none
+            margin: .3rem 0

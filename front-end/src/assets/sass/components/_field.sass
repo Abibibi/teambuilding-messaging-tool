@@ -5,19 +5,29 @@
     height: 4rem
 
     &-input
-      width: 13.7rem
-      height: 2.1rem
-      padding: 1.2rem 0 0
-      border: none
-      font-size: .9em
-      transition: padding .3s
-      // so jj/mm/aaaa default text in date input is not visible
-      background-color: transparent
-      border-bottom: $white solid .05rem
-      outline: none
+      @include responsive(phone)
+        width: 13.7rem
+        height: 2.1rem
+        padding: 1.2rem 0 0
+        border: none
+        font-size: .9em
+        transition: padding .3s
+        // so jj/mm/aaaa default text in date input is not visible
+        background-color: transparent
+        color: $contentWhite
+        border-bottom: $white solid .05rem
+        outline: none
 
-      &-white
-        color: $white
+      // to make datalist arrow visible
+      &::-webkit-calendar-picker-indicator
+        opacity: 100
+
+      &-space
+        padding: 0
+        width: 17rem
+        
+        &-image
+          margin-top: 1.1rem
 
     &-label
       position: absolute
@@ -28,10 +38,19 @@
       text-align: left
       font-size: 1.15rem
 
+      &-space
+        top: 0rem !important
+
+        &-up
+          font-size: .6em
+          text-transform: uppercase
+          color: $darkSeafoam
+          display: block
+
+        &-file
+          top: -.3rem
+
       &-animation
-        font-size: .6em
-        text-transform: uppercase
-        display: block
         animation: label .5s
         // with animation-fill-mode property,
         // styles are kept as such one animation

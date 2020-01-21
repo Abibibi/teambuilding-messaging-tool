@@ -1,4 +1,7 @@
 html
+    @include responsive(phone)
+        overflow-y: scroll
+
     @include responsive(tab-land)
         min-height: 100%
         position: relative
@@ -12,15 +15,75 @@ body
     font-family: $content
 
 .content
-    @include responsive(phone)
-        background-color: $backgroundContentGray
-        width: 100%
-        padding: 6rem 0
-        display: flex
-        justify-content: center
-        flex-direction: column
-        text-align: center
-        font-size: 1.3em
+    
+    &-container
+        @include responsive(phone)
+            background-color: $backgroundContentGray
+            width: 100%
+            padding: 6rem 0
+            display: flex
+            font-size: 1.3em
+            
+        @include responsive(tab-land)
+            padding: 7rem 0 10rem
 
-    @include responsive(tab-land)
-        padding: 7rem 0 10rem
+        &-unlogged
+            @include responsive(phone)
+                justify-content: center
+                flex-direction: column
+                text-align: center
+        
+        &-logged
+            @include responsive(phone)
+                flex-direction: column
+                width: 95%
+                margin: 0 auto
+
+                &-middle
+                    display: flex
+                    flex-direction: column
+                    align-items: center
+                    text-align: center
+
+        &-loggedtitle
+            @include responsive(phone)
+                text-align: center
+                font-size: 1.5rem
+                margin: 2rem 0 1.7rem
+            
+            @include responsive(tab-land)
+                font-size: 2rem
+                margin: 2.5rem 0 1.5rem
+
+    &-link
+
+        &:hover, &:active, &:visited
+            color: $darkSeafoam
+
+    &-joining
+    
+        &-paragraph
+
+            @include responsive(phone)
+                margin: .3rem 0
+                font-size: 1.1rem
+
+            @include responsive(tab-land)
+                margin: .3rem 0
+                font-size: 1.2rem
+
+            &-top
+                @include responsive(phone)
+                    margin-top: 2rem
+
+                @include responsive(tab-land)
+                    margin-top: 1.5rem
+
+            &-bottom
+                @include responsive(phone)
+                    margin-bottom: 2rem
+
+                @include responsive(tab-land)
+                    margin-bottom: 1rem
+    
+    

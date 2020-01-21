@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <div class="content">
+    <div class="content-container content-container-unlogged">
       <h1 class="form-title">Inscription</h1>
       <form class="form-form">
         <Field
@@ -10,6 +10,8 @@
           v-model="user.firstname"
           titleText="Saisissez votre prénom"
           labelText="Prénom"
+          inputClass="field-content-input"
+          labelClass="field-content-label"
         />
         <Field
           inputType="email"
@@ -17,6 +19,8 @@
           v-model="user.email"
           titleText="Saisissez votre e-mail"
           labelText="E-mail"
+          inputClass="field-content-input"
+          labelClass="field-content-label"
         />
         <Field
           inputType="password"
@@ -24,6 +28,8 @@
           v-model="user.password"
           titleText="Saisissez un mot de passe"
           labelText="Mot de passe"
+          inputClass="field-content-input"
+          labelClass="field-content-label"
         />
         <Field
           inputType="password"
@@ -31,9 +37,11 @@
           v-model="user.confirmPassword"
           titleText="Confirmez votre mot de passe"
           labelText="Confirmez le mot de passe"
+          inputClass="field-content-input"
+          labelClass="field-content-label"
         />
         <Button />
-        <router-link to="/connexion" class="form-question">Déjà membre ? Connectez-vous</router-link>
+        <router-link to="/connexion" class="content-link form-question form-question-register">Déjà membre ? Connectez-vous</router-link>
       </form>
     </div>
     <Footer />

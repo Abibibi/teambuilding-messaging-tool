@@ -3,7 +3,7 @@
     <Header />
     <div class="content-container content-container-unlogged">
       <h1 class="form-title">Inscription</h1>
-      <form class="form-form">
+      <form @submit.prevent="handleSubmit" class="form-form">
         <Field
           inputType="text"
           nameIdForText="firstname"
@@ -42,6 +42,7 @@
         />
         <Button />
         <router-link to="/connexion" class="content-link form-question form-question-register">Déjà membre ? Connectez-vous</router-link>
+        <p v-if="user.pwdEqualsConfirm === false">Les mots de passe ne correspondent pas.</p>
       </form>
     </div>
     <Footer />
@@ -68,8 +69,18 @@ export default {
         firstname: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        pwdEqualsConfirm: true
       }
+    }
+  },
+  methods: {
+    handleSubmit (event) {
+      const { password, confirmPassword } = this.user
+      if (password !== confirmPassword) {
+        this.user.pwdEqualsConfirm = false
+      }
+      console.log(this.user.pwdEqualsConfirm)
     }
   },
   mounted () {

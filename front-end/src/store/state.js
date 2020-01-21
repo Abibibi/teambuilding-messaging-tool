@@ -1,13 +1,10 @@
 export default {
-  logged: true,
-  joinedSpace: true,
+  logged: false,
+  joinedSpace: false,
   joiningWhileUnlogged: false,
-  tryToJoin: true,
-  space: true,
+  tryToJoin: false,
+  space: false,
   messagesReceived: false,
-  messagesSent: true,
-  spaceMembers: [{
-    id: 1,
-    firstname: 'Abi'
-  }]
+  messagesSent: false,
+  spaceMembers: []
 }

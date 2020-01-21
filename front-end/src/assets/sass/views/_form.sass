@@ -23,3 +23,24 @@
 
         &-register
             margin-bottom: 1.5rem
+
+    &-indication
+        @include responsive(phone)
+            font-size: .7rem
+            width: 13.7rem
+            margin: 0
+
+        &-error
+            color: $errorRed
+    
+    &-submission
+        padding: 1rem
+        margin: 0
+        width: 13.7rem
+        border-radius: 1.2rem
+
+        &-success
+            background-color: $successGreen
+            
+        &-fail
+            background-color: $errorRed

@@ -90,6 +90,9 @@ export default {
     ]),
 
     scrollToEnd () {
+      // to make sure form is visible after submission.
+      // after submission, status of the submission result is displayed (either submission was successful or failed)
+      // status is part of the form, so for it to be visible, scrollIntoView function will scroll to end of page
       const form = this.$refs.form
       form.scrollIntoView()
     },

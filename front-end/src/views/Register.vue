@@ -31,6 +31,7 @@
           inputClass="field-content-input"
           labelClass="field-content-label"
         />
+        <p class="register-indication" v-if="indications.pwd" ref="pwdIndication">Le mot de passe doit comprendre au minimum 8 caractères.</p>
         <Field
           inputType="password"
           nameIdForText="registerConfirmPassword"
@@ -40,9 +41,9 @@
           inputClass="field-content-input"
           labelClass="field-content-label"
         />
+        <p class="register-indication" v-if="indications.pwdEqualsConfirm" ref="confirmIndication">Les deux mots de passe doivent correspondre.</p>
         <Button />
         <router-link to="/connexion" class="content-link form-question form-question-register">Déjà membre ? Connectez-vous</router-link>
-        <p v-if="user.pwdEqualsConfirm === false">Les mots de passe ne correspondent pas.</p>
       </form>
     </div>
     <Footer />
@@ -69,7 +70,10 @@ export default {
         firstname: '',
         email: '',
         password: '',
-        confirmPassword: '',
+        confirmPassword: ''
+      },
+      indications: {
+        pwd: true,
         pwdEqualsConfirm: true
       }
     }
@@ -77,10 +81,18 @@ export default {
   methods: {
     handleSubmit (event) {
       const { password, confirmPassword } = this.user
-      if (password !== confirmPassword) {
-        this.user.pwdEqualsConfirm = false
+
+      if (password.length < 8) {
+        this.$refs.pwdIndication.classList.add('register-indication-error')
+      } else {
+        this.$refs.pwdIndication.classList.remove('register-indication-error')
       }
-      console.log(this.user.pwdEqualsConfirm)
+
+      if (password !== confirmPassword) {
+        this.$refs.confirmIndication.classList.add('register-indication-error')
+      } else {
+        this.$refs.confirmIndication.classList.remove('register-indication-error')
+      }
     }
   },
   mounted () {

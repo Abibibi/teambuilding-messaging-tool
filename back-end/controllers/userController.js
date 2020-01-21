@@ -52,7 +52,7 @@ const signIn = async (req, res) => {
 
   // if user has not signed up
   if(!tryingUser) {
-    return res.status(400).send({ notExistingUser: 'L\'utilisateur ne s\'est pas inscrit.' })
+    return res.status(400).send({ nonExistingUser: 'L\'utilisateur ne s\'est pas inscrit.' })
   }
   
   else if

@@ -6,6 +6,11 @@ const bcrypt = require('bcrypt');
 
 // userController methods
 
+// to check if user is already logged when arriving on the page
+const isAuth = async (req, res) => {
+  res.json(req.session.user);
+};
+
 // to sign up
 const signUp = async (req, res) => {
   const firstname = req.body.firstname;
@@ -68,7 +73,7 @@ const signIn = async (req, res) => {
 
     req.session.user = sessionUserInfo;
 
-    // session info is sended to client
+    // session info is sent to client
     return res.json(sessionUserInfo);
   } 
 
@@ -81,6 +86,7 @@ const signIn = async (req, res) => {
 
 
 module.exports = {
+    isAuth,
     signUp,
     signIn
 }

@@ -1,12 +1,17 @@
 // using express-promise-router to pass in async functions using a router in Express, and handle errors
 const Router = require('express-promise-router');
 const router = new Router();
+const authMiddleware = require('../utils/authMiddleware');
 
 // Controller
 const {
+    isAuth,
     signUp,
     signIn
 } = require('../controllers/userController');
+
+// to check if user is already logged when arriving on page
+router.get('/isAuth', authMiddleware, isAuth);
 
 // to sign up
 router.post('/add', signUp);

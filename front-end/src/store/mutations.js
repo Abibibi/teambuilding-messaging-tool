@@ -1,4 +1,16 @@
 export default {
+  alreadyAuthenticated: (state, payload) => {
+    state.logged = true
+    state.firstname = payload.firstname
+    state.email = payload.email
+  },
+
+  notAuthenticated: (state) => {
+    state.logged = false
+    state.firstname = ''
+    state.email = ''
+  },
+
   registerDone: (state) => {
     state.registerSuccess = true
     state.registerFail = false

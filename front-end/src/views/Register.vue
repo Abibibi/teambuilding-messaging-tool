@@ -43,7 +43,7 @@
         />
         <p class="form-indication" ref="confirmIndication">Les deux mots de passe doivent correspondre.</p>
         <Button />
-        <router-link to="/connexion" class="content-link form-question form-question-register">Déjà membre ? Connectez-vous</router-link>
+        <router-link to="/connexion" class="content-link form-question">Déjà membre ? Connectez-vous</router-link>
         <p class="form-submission form-submission-success" v-if="registerSuccess && !registerFail">Inscription réussie</p>
         <p class="form-submission form-submission-fail" v-if="registerFail && !registerSuccess">Compte déjà existant</p>
       </form>

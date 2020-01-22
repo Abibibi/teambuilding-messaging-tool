@@ -1,6 +1,11 @@
 export default {
   registerSuccess: false,
   registerFail: false,
+  loginSuccess: false,
+  nonExistingUser: false,
+  wrongPassword: false,
+  firstname: '',
+  email: '',
   logged: false,
   joinedSpace: false,
   joiningWhileUnlogged: false,

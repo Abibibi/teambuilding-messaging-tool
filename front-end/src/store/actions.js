@@ -1,6 +1,20 @@
 import axios from 'axios'
+import router from '@/router'
 
 export default {
+  isAuth: ({ commit }) => {
+    axios.get('http://localhost:5000/users/isAuth', { withCredentials: true })
+      .then((response) => {
+        console.log(response)
+        commit('alreadyAuthenticated', response.data)
+        router.push('/mes-espaces')
+      })
+      .catch(() => {
+        commit('notAuthenticated')
+        router.push('/')
+      })
+  },
+
   registering: ({ commit }, userInfo) => {
     axios.post('http://localhost:5000/users/add', userInfo, { withCredentials: true })
       .then(() => {
@@ -12,6 +26,21 @@ export default {
           commit('registerFailed')
         }
       })
-  }
+  },
 
+  login: ({ commit }, userInfo) => {
+    axios.post('http://localhost:5000/users/login', userInfo, { withCredentials: true })
+      .then((response) => {
+        console.log(response)
+        commit('loginDone', response.data)
+        router.push('/mes-espaces')
+      })
+      .catch((err) => {
+        if (err.response.data.nonExistingUser) {
+          commit('loginNonExistingUser')
+        } else if (err.response.data.wrongPassword) {
+          commit('loginWrongPassword')
+        }
+      })
+  }
 }

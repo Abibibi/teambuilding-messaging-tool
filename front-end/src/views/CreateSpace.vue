@@ -18,6 +18,7 @@
             nameIdForText="spaceImage"
             :spaceImage="space.image"
             @update:spaceImage="space.image = $event"
+            acceptText=".jpg,.jpeg,.png"
             titleText="Choisissez l'image de votre espace"
             labelText="Image de l'espace"
             inputClass="field-content-input field-content-input-space field-content-input-space-image"
@@ -43,7 +44,7 @@ import Field from '@/components/Field.vue'
 import SpaceCard from '@/components/SpaceCard.vue'
 import Button from '@/components/Button.vue'
 import Footer from '@/components/Footer.vue'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -67,11 +68,23 @@ export default {
     ])
   },
   methods: {
+    ...mapActions([
+      'newSpace'
+    ]),
+
     handleSubmit () {
       // information updated by Child component (Field) through two-way data binding
       // (with v-model for space.name and "update" event for space.image)
       console.log(this.space.name)
       console.log(this.space.image)
+
+      const formData = new FormData()
+      formData.append('name', this.space.name)
+      formData.append('image', this.space.image)
+
+      console.log(...formData)
+
+      this.newSpace(formData)
     }
   },
   mounted () {

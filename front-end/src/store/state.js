@@ -7,6 +7,7 @@ export default {
   firstname: '',
   email: '',
   logged: false,
+  loaded: false,
   joinedSpace: false,
   joiningWhileUnlogged: false,
   tryToJoin: false,

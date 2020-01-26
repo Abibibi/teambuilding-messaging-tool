@@ -12,6 +12,7 @@
       @change="onSelect"
       required
       :list="list"
+      :accept="accept"
     >
     <datalist v-if="list" id="allMembers" >
       <option v-for="({ id, firstname }) in membersToDisplay" :key="id">{{ firstname }}</option>
@@ -34,6 +35,7 @@ export default {
     nameIdForText: String,
     value: String,
     listText: String,
+    acceptText: String,
     titleText: String,
     inputClass: String,
     labelText: String,
@@ -45,6 +47,7 @@ export default {
       type: this.inputType,
       nameIdFor: this.nameIdForText,
       list: this.listText,
+      accept: this.acceptText,
       title: this.titleText,
       inputClassName: this.inputClass,
       label: this.labelText,

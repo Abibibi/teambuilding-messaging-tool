@@ -69,5 +69,20 @@ export default {
           commit('loginWrongPassword')
         }
       })
+  },
+
+  newSpace: (context, spaceInfo) => {
+    const config = {
+      headers: {
+        // to be able to send space info properly
+        'content-type': 'multipart/form-data'
+      },
+      withCredentials: true
+    }
+
+    axios.post('http://localhost:5000/spaces/addSpace', spaceInfo, config)
+      .then((response) => {
+        console.log(response)
+      })
   }
 }

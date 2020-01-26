@@ -1,17 +1,44 @@
 import axios from 'axios'
 import router from '@/router'
 
+const path = window.location.pathname
+
 export default {
   isAuth: ({ commit }) => {
     axios.get('http://localhost:5000/users/isAuth', { withCredentials: true })
       .then((response) => {
         console.log(response)
         commit('alreadyAuthenticated', response.data)
-        router.push('/mes-espaces')
+
+        if (path === '/' || path === '/inscription' || path === '/connexion') {
+          router.push('/mes-espaces')
+        }
       })
       .catch(() => {
         commit('notAuthenticated')
-        router.push('/')
+        console.log(path)
+
+        switch (path) {
+          case '/inscription':
+            // the "if (window.location.pathname !== path" code below
+            //  is to avoid navigation duplicates
+            // (if user is already on /mes-espaces page and reloads page,
+            // a new /mes-espaces page will not be pushed)
+            if (window.location.pathname !== path) router.push('/inscription')
+            break
+          case '/connexion':
+            if (window.location.pathname !== path) router.push('/connexion')
+            break
+          case '/':
+            if (window.location.pathname !== path) router.push('/')
+            break
+          default:
+            // if user tries to access a page
+            // that is not the /, /inscription or /connexion page
+            // (namely the only page accessibles to non authenticated users),
+            // they will be redirected to the / page
+            router.push('/')
+        }
       })
   },
 

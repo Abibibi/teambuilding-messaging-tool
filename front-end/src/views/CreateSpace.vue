@@ -27,10 +27,13 @@
           <Button />
         </form>
         <div v-if="createdSpace" class="content-container-logged-middle">
-          <p>L'espace Bla a bien été créé. Vous pouvez le retrouver en cliquant sur la carte ci-dessous :</p>
-          <SpaceCard />
-          <p>Vous pouvez également inviter vos collègues à vous rejoindre dans l'espace en leur communiquant ce lien :</p>
-          <router-link to="/accepter-espace-bla" class="home-form-link-a">Espace Bla</router-link>
+          <p>L'espace {{ createdSpace.name }} a bien été créé. Vous pouvez le retrouver en cliquant sur la carte ci-dessous :</p>
+          <SpaceCard
+            :spaceName=createdSpace.name
+            :spacePicture=createdSpace.picture
+          />
+          <p>Vous pouvez également inviter vos collègues à rejoindre l'espace {{ createdSpace.name }} en leur communiquant ce lien :</p>
+          <router-link :to="'/' + createdSpace.name + '/envoyer-message'" class="home-form-link-a">Espace {{ createdSpace.name }}</router-link>
         </div>
       </div>
     <Footer />
@@ -54,39 +57,57 @@ export default {
     Button,
     Footer
   },
+
   data () {
     return {
       space: {
         name: '',
-        image: {} // File type of data
+        image: {}, // File type of data
+        URL: ''
       }
     }
   },
+
   computed: {
     ...mapState([
       'createdSpace'
     ])
   },
+
   methods: {
     ...mapActions([
-      'newSpace'
+      'newSpace',
+      'removePreviousSpace'
     ]),
 
-    handleSubmit () {
+    async handleSubmit () {
+      await this.removePreviousSpace()
       // information updated by Child component (Field) through two-way data binding
       // (with v-model for space.name and "update" event for space.image)
-      console.log(this.space.name)
-      console.log(this.space.image)
+      const { name, image } = this.space
 
       const formData = new FormData()
-      formData.append('name', this.space.name)
-      formData.append('image', this.space.image)
+      formData.append('name', name)
+      formData.append('image', image)
 
       console.log(...formData)
 
       this.newSpace(formData)
+
+      this.space = {
+        name: '',
+        image: ''
+      }
+    },
+
+    createdSpaceURL () {
+      if (this.createdSpace) {
+        this.space.URL = `/accepter-espace-${this.createdSpace.name}`
+        return this.space.URL
+      }
     }
   },
+
   mounted () {
     document.title = 'Créer un espace - Gratitude'
   }

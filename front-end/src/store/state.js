@@ -8,6 +8,8 @@ export default {
   email: '',
   logged: false,
   loaded: false,
+  createdSpace: '',
+  spaces: [],
   joinedSpace: false,
   joiningWhileUnlogged: false,
   tryToJoin: false,

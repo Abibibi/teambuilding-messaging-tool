@@ -28,15 +28,17 @@ app.use(session({
   })
 );
 
+app.use('/public', express.static('public'));
 
 // ROUTES & API
 
 // Routers are required
 const usersRouter = require('./routes/users');
+const spacesRouter = require('./routes/spaces');
 
 // APIs associated with each Router (and routes included)
 app.use('/users', usersRouter);
-
+app.use('/spaces', spacesRouter);
 
 // PORT
 const port = process.env.PORT || 5000;

@@ -11,6 +11,7 @@ const isAuth = async (req, res) => {
   res.json(req.session.user);
 };
 
+
 // to sign up
 const signUp = async (req, res) => {
   const firstname = req.body.firstname;
@@ -86,7 +87,7 @@ const signIn = async (req, res) => {
 
 
 module.exports = {
-    isAuth,
-    signUp,
-    signIn
+  isAuth,
+  signUp,
+  signIn
 }

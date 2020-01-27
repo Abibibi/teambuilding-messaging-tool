@@ -55,5 +55,9 @@ export default {
 
   previouslySubmittedSpaceRemoved: (state) => {
     state.createdSpace = ''
+  },
+
+  allSpacesReceived: (state, payload) => {
+    state.spaces = payload
   }
 }

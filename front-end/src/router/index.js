@@ -55,12 +55,12 @@ const routes = [
     component: CreateSpace
   },
   {
-    path: '/accepter-espace-:espace',
+    path: '/accepter-espace/:espace',
     name: 'accept-space',
     component: AcceptSpace
   },
   {
-    path: '/confirmation-adhesion-:espace',
+    path: '/confirmation-adhesion/:espace',
     name: 'confirmed-space',
     meta: {
       requiresAuth: true

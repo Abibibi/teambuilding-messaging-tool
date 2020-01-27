@@ -31,6 +31,7 @@
           <SpaceCard
             :spaceName=createdSpace.name
             :spacePicture=createdSpace.picture
+            :spacePictureAlt=createdSpace.pictureAlt
           />
           <p>Vous pouvez également inviter vos collègues à rejoindre l'espace {{ createdSpace.name }} en leur communiquant ce lien :</p>
           <router-link :to="'/' + createdSpace.name + '/envoyer-message'" class="home-form-link-a">Espace {{ createdSpace.name }}</router-link>

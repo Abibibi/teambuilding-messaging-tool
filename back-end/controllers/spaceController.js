@@ -18,8 +18,9 @@ const addSpace = async (req, res) => {
         [name, picture, req.session.user.id]
     );
     
+    // to-do: add the picture alt manually
     const insertedSpace = await promisePool.query(
-        `SELECT id, name, picture FROM spaces
+        `SELECT id, name, picture, pictureAlt FROM spaces
         where name = ?
         AND users_id = ?`,
         [name, req.session.user.id]

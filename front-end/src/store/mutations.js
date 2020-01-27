@@ -46,5 +46,14 @@ export default {
     state.logged = false
     state.firstname = ''
     state.email = ''
+  },
+
+  newSpaceAdded: (state, payload) => {
+    state.spaces = [...state.spaces, payload]
+    state.createdSpace = payload
+  },
+
+  previouslySubmittedSpaceRemoved: (state) => {
+    state.createdSpace = ''
   }
 }

@@ -69,5 +69,34 @@ export default {
           commit('loginWrongPassword')
         }
       })
+  },
+
+  newSpace: ({ commit }, spaceInfo) => {
+    const config = {
+      headers: {
+        // to be able to send space info properly
+        'content-type': 'multipart/form-data'
+      },
+      withCredentials: true
+    }
+
+    axios.post('http://localhost:5000/spaces/addSpace', spaceInfo, config)
+      .then((response) => {
+        const sentSpace = response.data[0][0]
+
+        console.log(sentSpace)
+
+        const spaceToAdd = {
+          id: sentSpace.id,
+          name: sentSpace.name,
+          picture: sentSpace.picture
+        }
+
+        commit('newSpaceAdded', spaceToAdd)
+      })
+  },
+
+  removePreviousSpace: ({ commit }) => {
+    commit('previouslySubmittedSpaceRemoved')
   }
 }

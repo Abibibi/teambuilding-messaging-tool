@@ -18,6 +18,7 @@
             nameIdForText="spaceImage"
             :spaceImage="space.image"
             @update:spaceImage="space.image = $event"
+            acceptText=".jpg,.jpeg,.png"
             titleText="Choisissez l'image de votre espace"
             labelText="Image de l'espace"
             inputClass="field-content-input field-content-input-space field-content-input-space-image"
@@ -26,10 +27,14 @@
           <Button />
         </form>
         <div v-if="createdSpace" class="content-container-logged-middle">
-          <p>L'espace Bla a bien été créé. Vous pouvez le retrouver en cliquant sur la carte ci-dessous :</p>
-          <SpaceCard />
-          <p>Vous pouvez également inviter vos collègues à vous rejoindre dans l'espace en leur communiquant ce lien :</p>
-          <router-link to="/accepter-espace-bla" class="home-form-link-a">Espace Bla</router-link>
+          <p>L'espace {{ createdSpace.name }} a bien été créé. Vous pouvez le retrouver en cliquant sur la carte ci-dessous :</p>
+          <SpaceCard
+            :spaceName=createdSpace.name
+            :spacePicture=createdSpace.picture
+            :spacePictureAlt=createdSpace.pictureAlt
+          />
+          <p>Vous pouvez également inviter vos collègues à rejoindre l'espace {{ createdSpace.name }} en leur communiquant ce lien :</p>
+          <router-link :to="'/' + createdSpace.name + '/envoyer-message'" class="home-form-link-a">Espace {{ createdSpace.name }}</router-link>
         </div>
       </div>
     <Footer />
@@ -43,7 +48,7 @@ import Field from '@/components/Field.vue'
 import SpaceCard from '@/components/SpaceCard.vue'
 import Button from '@/components/Button.vue'
 import Footer from '@/components/Footer.vue'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -53,27 +58,57 @@ export default {
     Button,
     Footer
   },
+
   data () {
     return {
       space: {
         name: '',
-        image: {} // File type of data
+        image: {}, // File type of data
+        URL: ''
       }
     }
   },
+
   computed: {
     ...mapState([
       'createdSpace'
     ])
   },
+
   methods: {
-    handleSubmit () {
+    ...mapActions([
+      'newSpace',
+      'removePreviousSpace'
+    ]),
+
+    async handleSubmit () {
+      await this.removePreviousSpace()
       // information updated by Child component (Field) through two-way data binding
       // (with v-model for space.name and "update" event for space.image)
-      console.log(this.space.name)
-      console.log(this.space.image)
+      const { name, image } = this.space
+
+      const formData = new FormData()
+      formData.append('name', name)
+      formData.append('image', image)
+
+      console.log(...formData)
+
+      this.newSpace(formData)
+
+      this.space = {
+        name: '',
+        image: ''
+      }
+    },
+
+    createdSpaceURL () {
+      if (this.createdSpace) {
+        this.space.URL = `/accepter-espace-${this.createdSpace.name}`
+        return this.space.URL
+      }
     }
   },
+
   mounted () {
     document.title = 'Créer un espace - Gratitude'
   }

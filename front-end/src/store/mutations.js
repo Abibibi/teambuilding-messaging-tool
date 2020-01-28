@@ -67,5 +67,29 @@ export default {
 
   spaceAboutToJoin: (state, payload) => {
     state.spaceToJoin = payload
+  },
+
+  spaceJoinedWhenInitiallyLogged: (state, payload) => {
+    state.joinedSpace = true
+    state.sessionUserSpaces = [...state.sessionUserSpaces, payload]
+    state.joiningWhileUnlogged = false
+    state.tryToJoin = false
+  },
+
+  spaceNotJoinedBecauseUnlogged: (state) => {
+    state.joinedSpace = false
+    state.joiningWhileUnlogged = true
+    state.tryToJoin = true
+  },
+
+  spaceJoinedAfterLogin: (state, payload) => {
+    state.joinedSpace = false
+    state.sessionUserSpaces = [...state.sessionUserSpaces, payload]
+    state.joiningWhileUnlogged = false
+    state.tryToJoin = true
+  },
+
+  alreadyJoinedSpaceRemoved: (state) => {
+    state.spaceToJoin = ''
   }
 }

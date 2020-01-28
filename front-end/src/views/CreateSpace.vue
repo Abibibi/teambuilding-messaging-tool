@@ -78,11 +78,11 @@ export default {
   methods: {
     ...mapActions([
       'newSpace',
-      'removePreviousSpace'
+      'removePreviouslySubmittedSpace'
     ]),
 
     async handleSubmit () {
-      await this.removePreviousSpace()
+      await this.removePreviouslySubmittedSpace()
       // information updated by Child component (Field) through two-way data binding
       // (with v-model for space.name and "update" event for space.image)
       const { name, image } = this.space

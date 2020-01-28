@@ -10,6 +10,7 @@ export default {
   loaded: false,
   createdSpace: '',
   spaces: [],
+  spaceToJoin: '',
   joinedSpace: false,
   joiningWhileUnlogged: false,
   tryToJoin: false,

@@ -5,7 +5,7 @@
         <h1 class="content-container-loggedtitle">Mes espaces</h1>
         <div class="spacecards">
           <SpaceCard
-            v-for="({ id, name, picture }) in sessionUserSpaces"
+            v-for="({ id, name, picture, pictureAlt }) in sessionUserSpaces"
             :key="id"
             :spaceName="name"
             :spacePicture="picture"

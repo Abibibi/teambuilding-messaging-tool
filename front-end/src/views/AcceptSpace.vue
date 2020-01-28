@@ -2,7 +2,7 @@
   <div>
     <Header />
       <div class="content-container content-container-logged">
-        <h1 class="content-container-loggedtitle">Untel vous invite à rejoindre l'espace Bla.</h1>
+        <h1 class="content-container-loggedtitle">{{ spaceToJoin.spaceCreator }} vous invite à rejoindre l'espace {{ spaceToJoin.name }}.</h1>
         <div class="content-container-logged-middle">
           <button class="button accept-space-button">Rejoindre</button>
           <JoinedSpace v-if="logged && joinedSpace" :joiningFromAcceptView="joiningFromAccept"/>
@@ -20,7 +20,7 @@
 import Header from '@/components/Header.vue'
 import JoinedSpace from '@/components/JoinedSpace.vue'
 import Footer from '@/components/Footer.vue'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -35,13 +35,20 @@ export default {
   },
   computed: {
     ...mapState([
+      'spaceToJoin',
       'logged',
       'joinedSpace',
       'joiningWhileUnlogged'
     ])
   },
+  methods: {
+    ...mapActions([
+      'catchSpaceToJoin'
+    ])
+  },
   mounted () {
     document.title = 'Rejoindre un espace - Gratitude'
+    this.catchSpaceToJoin()
   }
 }
 </script>

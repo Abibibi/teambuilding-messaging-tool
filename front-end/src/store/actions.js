@@ -67,5 +67,18 @@ export default {
         commit('connectedUserSpacesReceived', response.data)
       })
       .catch((err) => console.log(err))
+  },
+
+  catchSpaceToJoin: ({ commit, state }) => {
+    const spaceToSend = state.spaces.find((oneSpace) =>
+      window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
+    ).name
+
+    console.log(spaceToSend)
+    axios.get(`http://localhost:5000/spaces/spaceToJoin/${spaceToSend}`, { withCredentials: true })
+      .then((response) => {
+        commit('spaceAboutToJoin', response.data)
+      })
+      .catch((err) => console.log(err))
   }
 }

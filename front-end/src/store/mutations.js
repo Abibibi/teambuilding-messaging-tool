@@ -63,5 +63,9 @@ export default {
 
   connectedUserSpacesReceived: (state, payload) => {
     state.sessionUserSpaces = payload
+  },
+
+  spaceAboutToJoin: (state, payload) => {
+    state.spaceToJoin = payload
   }
 }

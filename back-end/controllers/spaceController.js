@@ -74,9 +74,20 @@ const findSpaceToJoin = async (req, res) => {
     res.json(results[0])
 };
 
+const joiningNewSpace = async (req, res) => {
+    await promisePool.query(
+        `INSERT INTO users_have_spaces (users_id, spaces_id)
+        VALUES (?, ?)`,
+        [req.session.user.id, req.params.spaceId]
+    )
+    
+    res.json('Le membre a bien rejoint le groupe');
+};
+
 module.exports = {
     addSpace,
     allSpaces,
     oneUserSpaces,
-    findSpaceToJoin
+    findSpaceToJoin,
+    joiningNewSpace
 }

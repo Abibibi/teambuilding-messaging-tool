@@ -40,6 +40,29 @@ const addSpace = async (req, res) => {
     res.json(insertedSpace);
 };
 
+const allSpaces = async (req, res) => {
+    [results] = await promisePool.query(
+        `SELECT id, name FROM spaces`
+    )
+    
+    res.json(results)
+};
+
+const oneUserSpaces = async (req, res) => {
+    [results] = await promisePool.query(
+        `SELECT s.id, s.name, s.picture, s.pictureAlt
+        FROM spaces as s
+        INNER JOIN users_have_spaces as us
+        on s.id = us.spaces_id
+        WHERE us.users_id = ?`,
+        [req.session.user.id]
+    )
+    
+    res.json(results)
+}
+
 module.exports = {
-    addSpace
+    addSpace,
+    allSpaces,
+    oneUserSpaces
 }

@@ -6,9 +6,15 @@ const upload = require('../utils/fileUpload');
 
 // Controller
 const {
-    addSpace
+    addSpace,
+    allSpaces,
+    oneUserSpaces
 } = require('../controllers/spaceController');
 
 router.post('/addSpace', [authMiddleware, upload.single('image')], addSpace);
+
+router.get('/allSpaces', allSpaces);
+
+router.get('/oneUserSpaces', oneUserSpaces);
 
 module.exports = router;

@@ -10,6 +10,8 @@ import ConfirmedSpace from '@/views/ConfirmedSpace.vue'
 import ReceivedMessages from '@/views/ReceivedMessages.vue'
 import SentMessages from '@/views/SentMessages.vue'
 import SendMessage from '@/views/SendMessage.vue'
+import axios from 'axios'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -99,18 +101,33 @@ const router = new VueRouter({
   routes
 })
 
-/* router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresVisitor)) {
-    if (store.state.logged) {
-      next({
-        name: 'welcome'
-      })
-    } else {
-      next()
-    }
-  } else {
-    next()
-  }
-}) */
+router.beforeEach((to, from, next) => {
+  axios.get('http://localhost:5000/users/isAuth', { withCredentials: true })
+    .then((response) => {
+      console.log(response)
+      store.commit('alreadyAuthenticated', response.data)
+      console.log('test-axios-ok')
+      console.log('is logged true?' + store.state.logged)
+
+      if (to.matched.some(record => record.meta.requiresVisitor)) {
+        next({
+          name: 'my-spaces'
+        })
+      } else {
+        next()
+      }
+    })
+    .catch(() => {
+      store.commit('notAuthenticated')
+      console.log('is logged false?: ' + store.state.logged)
+      if (to.matched.some(record => record.meta.requiresAuth)) {
+        next({
+          name: 'home'
+        })
+      } else {
+        next()
+      }
+    })
+})
 
 export default router

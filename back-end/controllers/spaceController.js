@@ -59,10 +59,24 @@ const oneUserSpaces = async (req, res) => {
     )
     
     res.json(results)
-}
+};
+
+const findSpaceToJoin = async (req, res) => {
+    [results] = await promisePool.query(
+        `SELECT s.id, s.name, s.picture, s.pictureAlt, u.firstname
+        FROM users as u
+        LEFT JOIN spaces as s
+        ON u.id = s.creator_id
+        WHERE s.name = ?`,
+        [req.params.spaceName]
+    )
+
+    res.json(results[0])
+};
 
 module.exports = {
     addSpace,
     allSpaces,
-    oneUserSpaces
+    oneUserSpaces,
+    findSpaceToJoin
 }

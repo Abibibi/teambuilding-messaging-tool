@@ -8,13 +8,16 @@ const upload = require('../utils/fileUpload');
 const {
     addSpace,
     allSpaces,
-    oneUserSpaces
+    oneUserSpaces,
+    findSpaceToJoin
 } = require('../controllers/spaceController');
 
 router.post('/addSpace', [authMiddleware, upload.single('image')], addSpace);
 
 router.get('/allSpaces', allSpaces);
 
-router.get('/oneUserSpaces', oneUserSpaces);
+router.get('/oneUserSpaces', authMiddleware, oneUserSpaces);
+
+router.get('/spaceToJoin/:spaceName', authMiddleware, findSpaceToJoin);
 
 module.exports = router;

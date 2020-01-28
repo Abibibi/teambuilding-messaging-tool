@@ -102,8 +102,8 @@ const routes = [
     component: SendMessage
   },
   {
-    path: '/page-non-trouvee',
-    name: 'unfound',
+    path: '*',
+    name: 'not-found',
     component: notFound
   }
 ]
@@ -118,6 +118,8 @@ router.beforeEach((to, from, next) => {
   axios.get('http://localhost:5000/spaces/allSpaces', { withCredentials: true })
     .then((response) => {
       console.log(response)
+      // this allows to put response.data
+      // in the spaces key, in the state
       store.commit('allSpacesReceived', response.data)
     })
 
@@ -153,7 +155,7 @@ router.beforeEach((to, from, next) => {
           // if the space name param in the URL
           // does not match any actual space names (contained in the state),
           // user is redirected to 404 page
-          next({ name: 'unfound' })
+          next({ name: 'not-found' })
           console.log('onespacename does not exist')
         }
       } else {
@@ -167,6 +169,19 @@ router.beforeEach((to, from, next) => {
         next({
           name: 'home'
         })
+      } else if (!store.state.logged && to.matched.some(record => record.meta.requiresSpaces)) {
+        const spaces = store.state.spaces
+        console.log(spaces)
+        const oneSpace = spaces.find((singleSpace) => singleSpace.name === to.params.espace)
+        console.log(oneSpace)
+
+        if (oneSpace) {
+          next()
+          console.log('onespacename exists')
+        } else {
+          next({ name: 'not-found' })
+          console.log('onespacename does not exist')
+        }
       } else {
         next()
       }

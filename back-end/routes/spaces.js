@@ -9,7 +9,8 @@ const {
     addSpace,
     allSpaces,
     oneUserSpaces,
-    findSpaceToJoin
+    findSpaceToJoin,
+    joiningNewSpace
 } = require('../controllers/spaceController');
 
 router.post('/addSpace', [authMiddleware, upload.single('image')], addSpace);
@@ -19,5 +20,7 @@ router.get('/allSpaces', allSpaces);
 router.get('/oneUserSpaces', authMiddleware, oneUserSpaces);
 
 router.get('/spaceToJoin/:spaceName', findSpaceToJoin);
+
+router.get('/spaceNewlyJoined/:spaceId', authMiddleware, joiningNewSpace);
 
 module.exports = router;

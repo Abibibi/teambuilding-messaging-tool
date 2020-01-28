@@ -89,6 +89,10 @@ export default {
     state.tryToJoin = true
   },
 
+  tryToJoinFalseAfterConfirmingJoiningSpace: (state) => {
+    state.tryToJoin = false
+  },
+
   alreadyJoinedSpaceRemoved: (state) => {
     state.spaceToJoin = ''
   }

@@ -63,7 +63,7 @@ const oneUserSpaces = async (req, res) => {
 
 const findSpaceToJoin = async (req, res) => {
     [results] = await promisePool.query(
-        `SELECT s.id, s.name, s.picture, s.pictureAlt, u.firstname
+        `SELECT s.id, s.name, s.picture, s.pictureAlt, u.firstname spaceCreator
         FROM users as u
         LEFT JOIN spaces as s
         ON u.id = s.creator_id

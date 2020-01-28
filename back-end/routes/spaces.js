@@ -18,6 +18,6 @@ router.get('/allSpaces', allSpaces);
 
 router.get('/oneUserSpaces', authMiddleware, oneUserSpaces);
 
-router.get('/spaceToJoin/:spaceName', authMiddleware, findSpaceToJoin);
+router.get('/spaceToJoin/:spaceName', findSpaceToJoin);
 
 module.exports = router;

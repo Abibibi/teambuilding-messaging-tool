@@ -2,14 +2,6 @@ import axios from 'axios'
 import router from '@/router'
 
 export default {
-  getAllSpaces: ({ commit }) => {
-    axios.get('http://localhost:5000/spaces/allSpaces', { withCredentials: true })
-      .then((response) => {
-        console.log(response)
-        commit('allSpacesReceived', response.data)
-      })
-  },
-
   registering: ({ commit }, userInfo) => {
     axios.post('http://localhost:5000/users/add', userInfo, { withCredentials: true })
       .then(() => {
@@ -62,9 +54,18 @@ export default {
 
         commit('newSpaceAdded', spaceToAdd)
       })
+      .catch((err) => console.log(err))
   },
 
   removePreviousSpace: ({ commit }) => {
     commit('previouslySubmittedSpaceRemoved')
+  },
+
+  catchSessionUserSpaces: ({ commit }) => {
+    axios.get('http://localhost:5000/spaces/oneUserSpaces', { withCredentials: true })
+      .then((response) => {
+        commit('connectedUserSpacesReceived', response.data)
+      })
+      .catch((err) => console.log(err))
   }
 }

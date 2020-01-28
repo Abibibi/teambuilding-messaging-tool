@@ -49,7 +49,7 @@ export default {
   },
 
   newSpaceAdded: (state, payload) => {
-    state.spaces = [...state.spaces, payload]
+    state.spaces = [...state.spaces, { id: payload.id, name: payload.name }]
     state.createdSpace = payload
   },
 
@@ -59,5 +59,9 @@ export default {
 
   allSpacesReceived: (state, payload) => {
     state.spaces = payload
+  },
+
+  connectedUserSpacesReceived: (state, payload) => {
+    state.sessionUserSpaces = payload
   }
 }

@@ -13,6 +13,7 @@ export default {
   joinedSpace: false,
   joiningWhileUnlogged: false,
   tryToJoin: false,
+  sessionUserSpaces: [],
   space: false,
   messagesReceived: false,
   messagesSent: false,

@@ -34,7 +34,7 @@
             :spacePictureAlt=createdSpace.pictureAlt
           />
           <p>Vous pouvez également inviter vos collègues à rejoindre l'espace {{ createdSpace.name }} en leur communiquant ce lien :</p>
-          <router-link :to="'/' + createdSpace.name + '/envoyer-message'" class="home-form-link-a">Espace {{ createdSpace.name }}</router-link>
+          <router-link :to="'/accepter-espace/' + createdSpace.name" class="home-form-link-a">Espace {{ createdSpace.name }}</router-link>
         </div>
       </div>
     <Footer />
@@ -103,7 +103,7 @@ export default {
 
     createdSpaceURL () {
       if (this.createdSpace) {
-        this.space.URL = `/accepter-espace-${this.createdSpace.name}`
+        this.space.URL = `/accepter-espace/${this.createdSpace.name}`
         return this.space.URL
       }
     }

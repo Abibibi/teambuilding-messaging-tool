@@ -15,12 +15,20 @@ export default {
       })
   },
 
-  login: ({ commit }, userInfo) => {
+  login: ({ commit, state, dispatch }, userInfo) => {
     axios.post('http://localhost:5000/users/login', userInfo, { withCredentials: true })
       .then((response) => {
         console.log(response)
         commit('loginDone', response.data)
-        router.push('/mes-espaces')
+
+        if (state.tryToJoin) {
+          dispatch('joiningOneSpace').then(() => {
+            commit('spaceJoinedAfterLogin', state.spaceToJoin)
+          })
+          router.push(`/confirmation-adhesion/${state.spaceToJoin.name}`)
+        } else {
+          router.push('/mes-espaces')
+        }
       })
       .catch((err) => {
         if (err.response.data.nonExistingUser) {
@@ -57,7 +65,7 @@ export default {
       .catch((err) => console.log(err))
   },
 
-  removePreviousSpace: ({ commit }) => {
+  removePreviouslySubmittedSpace: ({ commit }) => {
     commit('previouslySubmittedSpaceRemoved')
   },
 
@@ -70,15 +78,35 @@ export default {
   },
 
   catchSpaceToJoin: ({ commit, state }) => {
-    const spaceToSend = state.spaces.find((oneSpace) =>
+    const spaceName = state.spaces.find((oneSpace) =>
       window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
     ).name
 
-    console.log(spaceToSend)
-    axios.get(`http://localhost:5000/spaces/spaceToJoin/${spaceToSend}`, { withCredentials: true })
+    console.log(spaceName)
+    axios.get(`http://localhost:5000/spaces/spaceToJoin/${spaceName}`, { withCredentials: true })
       .then((response) => {
         commit('spaceAboutToJoin', response.data)
       })
       .catch((err) => console.log(err))
+  },
+
+  firstTryingToJoinSpace: ({ state, dispatch, commit }) => {
+    if (state.logged) {
+      dispatch('joiningOneSpace').then(() => {
+        commit('spaceJoinedWhenInitiallyLogged', state.spaceToJoin)
+      })
+    } else {
+      commit('spaceNotJoinedBecauseUnlogged')
+    }
+  },
+
+  joiningOneSpace: ({ state }) => {
+    const spaceId = state.spaceToJoin.id
+
+    axios.get(`http://localhost:5000/spaces/spaceNewlyJoined/${spaceId}`, { withCredentials: true })
+  },
+
+  removeAlreadyJoinedSpace: ({ commit }) => {
+    commit('alreadyJoinedSpaceRemoved')
   }
 }

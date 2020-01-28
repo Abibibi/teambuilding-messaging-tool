@@ -2,7 +2,7 @@
   <div>
     <Header />
       <div class="content-container content-container-logged">
-        <JoinedSpace :joiningFromConfirmedView="joiningFromConfirmed" />
+        <JoinedSpace />
       </div>
     <Footer />
   </div>
@@ -20,11 +20,6 @@ export default {
     Header,
     JoinedSpace,
     Footer
-  },
-  data () {
-    return {
-      joiningFromConfirmed: true
-    }
   },
   computed: {
     ...mapState([

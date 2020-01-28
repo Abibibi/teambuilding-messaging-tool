@@ -4,7 +4,7 @@
       <div class="content-container content-container-logged">
         <h1 class="content-container-loggedtitle">{{ spaceToJoin.spaceCreator }} vous invite à rejoindre l'espace {{ spaceToJoin.name }}.</h1>
         <div class="content-container-logged-middle">
-          <button class="button accept-space-button">Rejoindre</button>
+          <button class="button accept-space-button" @click="attemptJoining">Rejoindre</button>
           <JoinedSpace v-if="logged && joinedSpace" :joiningFromAcceptView="joiningFromAccept"/>
           <div v-else-if="!logged && joiningWhileUnlogged" class="content-container-logged-middle">
             <p class="content-joining-paragraph content-joining-paragraph-top"><router-link to="/connexion" class="content-link">Connectez-vous</router-link> pour pouvoir rejoindre l'espace Bla.</p>
@@ -43,11 +43,18 @@ export default {
   },
   methods: {
     ...mapActions([
-      'catchSpaceToJoin'
-    ])
+      'removeAlreadyJoinedSpace',
+      'catchSpaceToJoin',
+      'firstTryingToJoinSpace'
+    ]),
+
+    attemptJoining () {
+      this.firstTryingToJoinSpace()
+    }
   },
   mounted () {
     document.title = 'Rejoindre un espace - Gratitude'
+    this.removeAlreadyJoinedSpace()
     this.catchSpaceToJoin()
   }
 }

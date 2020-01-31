@@ -19,7 +19,7 @@ const signUp = async (req, res) => {
   let password = req.body.password;
 
   const [results] = await promisePool.query(
-      `SELECT * FROM users WHERE email=? LIMIT 1`,
+      `SELECT * FROM users WHERE email = ? LIMIT 1`,
       [email]
   );
   
@@ -50,7 +50,7 @@ const signIn = async (req, res) => {
   const { email, password } = req.body
 
   const [results] = await promisePool.query(
-      `SELECT * FROM users WHERE email=? LIMIT 1`,
+      `SELECT * FROM users WHERE email = ? LIMIT 1`,
       [email]
   );
   

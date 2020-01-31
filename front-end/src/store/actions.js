@@ -124,5 +124,15 @@ export default {
         commit('oneSpaceMembersReceived', response.data)
       })
       .catch((err) => console.log(err))
+  },
+
+  sendMessage: ({ commit, state }, messageInfo) => {
+    const spaceName = state.spaces.find((oneSpace) =>
+      window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
+    ).name
+
+    messageInfo.spaceName = spaceName
+
+    axios.post(`http://localhost:5000/messages/addMessage`, messageInfo, { withCredentials: true })
   }
 }

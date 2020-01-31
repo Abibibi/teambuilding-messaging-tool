@@ -3,7 +3,7 @@
     <Header />
       <div class="content-container content-container-logged content-container-logged-middle">
         <h1 class="content-container-loggedtitle">Envoyer un message</h1>
-        <form class="form-form send-form">
+        <form @submit.prevent="handleSubmit" class="form-form send-form">
           <Field
             inputType="text"
             nameIdForText="member"
@@ -54,8 +54,20 @@ export default {
   },
   methods: {
     ...mapActions([
-      'catchOneSpaceMembers'
-    ])
+      'catchOneSpaceMembers',
+      'sendMessage'
+    ]),
+
+    handleSubmit () {
+      const messageInfo = {
+        receiver: this.member.firstname,
+        content: this.message
+      }
+
+      this.sendMessage(messageInfo)
+
+      console.log(messageInfo)
+    }
   },
   mounted () {
     this.catchOneSpaceMembers()

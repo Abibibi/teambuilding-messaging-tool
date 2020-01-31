@@ -29,7 +29,8 @@ const receivedMessages = async (req, res) => {
         `SELECT
             m.id,
             m.content,
-            s.name,
+            m.created_At as date,
+            s.name as spaceName,
             u.firstname as receiver
         FROM
             messages as m
@@ -38,8 +39,10 @@ const receivedMessages = async (req, res) => {
                 JOIN users as u
                     ON m.receiver_id = u.id
         WHERE
-            u.id = ?`,
-        [req.session.user.id]
+            u.id = ?
+        AND
+            s.name = ?`,
+        [req.session.user.id, req.params.spaceName]
     );
 
     res.json(results)

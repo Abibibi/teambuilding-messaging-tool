@@ -12,6 +12,6 @@ const {
 
 router.post('/addMessage', authMiddleware, addMessage);
 
-router.get('/receivedMessages', authMiddleware, receivedMessages);
+router.get('/receivedMessages/:spaceName', authMiddleware, receivedMessages);
 
 module.exports = router;

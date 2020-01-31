@@ -1,8 +1,8 @@
 <template>
   <div class="message">
-    <p v-if="messagesSent" class="message-receiver">to Bla, <span class="message-date message-date-sent">le 12 décembre 2019</span></p>
-    <p v-else-if="messagesReceived" class="message-date message-date-received">Le {{ receivedDate }}</p>
-    <p class="message-content">{{ receivedContent }}</p>
+    <p v-show="messagesSent" class="message-receiver">À {{ receiver }}, <span class="message-date message-date-sent">le {{ date }}</span></p>
+    <p v-show="messagesReceived" class="message-date message-date-received">Le {{ date }}</p>
+    <p class="message-content">{{ content }}</p>
   </div>
 </template>
 
@@ -12,13 +12,15 @@ import { mapState } from 'vuex'
 
 export default {
   props: {
-    receivedMessageContent: String,
-    receivedMessageDate: String
+    messageContent: String,
+    messageDate: String,
+    sentMessageReceiver: String
   },
   data () {
     return {
-      receivedContent: this.receivedMessageContent,
-      receivedDate: this.receivedMessageDate
+      content: this.messageContent,
+      date: this.messageDate,
+      receiver: this.sentMessageReceiver
     }
   },
   computed: {

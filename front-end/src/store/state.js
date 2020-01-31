@@ -19,6 +19,7 @@ export default {
   spaceMembers: [],
   sendMessageSuccess: false,
   messagesReceived: false,
-  messagesContentReceived: [],
+  receivedMessagesContent: [],
+  sentMessagesContent: [],
   messagesSent: false
 }

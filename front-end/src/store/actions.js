@@ -148,5 +148,16 @@ export default {
       .then((response) => {
         commit('messagesReceivedDisplayed', response.data)
       })
+  },
+
+  catchSentMessages: ({ commit, state }) => {
+    const spaceName = state.spaces.find((oneSpace) =>
+      window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
+    ).name
+
+    axios.get(`http://localhost:5000/messages/sentMessages/${spaceName}`, { withCredentials: true })
+      .then((response) => {
+        commit('messagesSentDisplayed', response.data)
+      })
   }
 }

@@ -5,10 +5,10 @@
         <h1 class="content-container-loggedtitle">Messages reçus</h1>
         <div class="messages">
           <Message
-            v-for="({ id, content, date }) in definitiveMessages"
+            v-for="({ id, content, date }) in receivedMessagesFormattedDate"
             :key="id"
-            :receivedMessageContent="content"
-            :receivedMessageDate="date"
+            :messageContent="content"
+            :messageDate="date"
           />
         </div>
       </div>
@@ -35,12 +35,11 @@ export default {
   },
   computed: {
     ...mapState([
-      'spaces',
-      'messagesContentReceived'
+      'spaces'
     ]),
 
     ...mapGetters([
-      'definitiveMessages'
+      'receivedMessagesFormattedDate'
     ])
   },
   methods: {
@@ -50,7 +49,6 @@ export default {
   },
   mounted () {
     this.catchReceivedMessages()
-    console.log(this.formattedReceivedMessages)
 
     const spaceSlug = this.spaces.find((oneSpace) =>
       window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''

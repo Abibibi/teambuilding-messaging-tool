@@ -1,33 +1,61 @@
 <template>
-  <Messages />
+  <div>
+    <Header />
+      <div class="content-container content-container-logged">
+        <h1 class="content-container-loggedtitle">Messages envoyés</h1>
+        <div class="messages">
+          <Message
+            v-for="({ id, content, date, receiver }) in sentMessagesFormattedDate"
+            :key="id"
+            :messageContent="content"
+            :messageDate="date"
+            :sentMessageReceiver="receiver"
+          />
+        </div>
+      </div>
+    <Footer />
+  </div>
 </template>
 
 <script>
-
-import Messages from '@/components/Messages.vue'
-import { mapState, mapActions } from 'vuex'
+import Header from '@/components/Header.vue'
+import Message from '@/components/Message.vue'
+import Footer from '@/components/Footer.vue'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
-    Messages
+    Header,
+    Message,
+    Footer
+  },
+  data () {
+    return {
+      formattedReceivedMessages: []
+    }
   },
   computed: {
     ...mapState([
       'spaces'
+    ]),
+
+    ...mapGetters([
+      'sentMessagesFormattedDate'
     ])
   },
   methods: {
     ...mapActions([
-      'messagesType'
+      'catchSentMessages'
     ])
   },
   mounted () {
+    this.catchSentMessages()
+
     const spaceSlug = this.spaces.find((oneSpace) =>
       window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
     ).name
 
-    document.title = `Messages envoyés - ${spaceSlug} - Gratitude`
-    this.messagesType()
+    document.title = `Messages reçus - ${spaceSlug} - Gratitude`
   }
 }
 </script>

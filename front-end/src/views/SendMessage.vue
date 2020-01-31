@@ -76,6 +76,9 @@ export default {
 
       this.sendMessage(messageInfo)
 
+      this.member.firstname = ''
+      this.message = ''
+
       this.scrollToEnd()
     }
   },

@@ -6,7 +6,7 @@
         <h1 v-else-if="messagesSent" class="content-container-loggedtitle">Messages envoyés</h1>
         <div v-if="messagesReceived" class="messages">
           <Message
-            v-for="({ id, content, date }) in messagesContentReceived"
+            v-for="({ id, content, date }) in formattedReceivedMessages"
             :key="id"
             :receivedMessageContent="content"
             :receivedMessageDate="date"
@@ -23,6 +23,7 @@ import Header from '@/components/Header.vue'
 import Message from '@/components/Message.vue'
 import Footer from '@/components/Footer.vue'
 import { mapState } from 'vuex'
+import formattingMessagesDate from '@/utils/formattedDate'
 
 export default {
   components: {
@@ -30,15 +31,25 @@ export default {
     Message,
     Footer
   },
+  data () {
+    return {
+      formattedReceivedMessages: []
+    }
+  },
   computed: {
     ...mapState([
       'messagesReceived',
-      'messagesContentReceived',
       'messagesSent'
     ])
   },
+  methods: {
+    messagesProperDate () {
+      this.formattedReceivedMessages = formattingMessagesDate(this.messagesContentReceived)
+      return this.formattedReceivedMessages
+    }
+  },
   mounted () {
-    document.title = 'Messages reçus - Espace - Gratitude'
+
   }
 }
 </script>

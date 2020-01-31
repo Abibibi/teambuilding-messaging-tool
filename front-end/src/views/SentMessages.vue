@@ -5,11 +5,16 @@
 <script>
 
 import Messages from '@/components/Messages.vue'
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
     Messages
+  },
+  computed: {
+    ...mapState([
+      'spaces'
+    ])
   },
   methods: {
     ...mapActions([
@@ -17,7 +22,11 @@ export default {
     ])
   },
   mounted () {
-    document.title = 'Messages reçus - Espace - Gratitude'
+    const spaceSlug = this.spaces.find((oneSpace) =>
+      window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
+    ).name
+
+    document.title = `Messages envoyés - ${spaceSlug} - Gratitude`
     this.messagesType()
   }
 }

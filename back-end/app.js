@@ -35,10 +35,12 @@ app.use('/public', express.static('public'));
 // Routers are required
 const usersRouter = require('./routes/users');
 const spacesRouter = require('./routes/spaces');
+const messagesRouter = require('./routes/messages');
 
 // APIs associated with each Router (and routes included)
 app.use('/users', usersRouter);
 app.use('/spaces', spacesRouter);
+app.use('/messages', messagesRouter);
 
 // PORT
 const port = process.env.PORT || 5000;

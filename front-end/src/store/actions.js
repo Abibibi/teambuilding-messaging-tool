@@ -137,5 +137,24 @@ export default {
       .then(() => {
         commit('messageSent')
       })
+  },
+
+  messagesType: ({ commit, state }) => {
+    const spaceName = state.spaces.find((oneSpace) =>
+      window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
+    ).name
+
+    if (window.location.pathname.includes('messages-recus')) {
+      axios.get(`http://localhost:5000/messages/receivedMessages/${spaceName}`, { withCredentials: true })
+        .then((response) => {
+          commit('messagesReceivedDisplayed', response.data)
+        })
+    } else if (window.location.pathname.includes('messages-envoyes')) {
+      commit('messagesSentDisplayed')
+    }
+  },
+
+  catchReceivedMessages: ({ commit }) => {
+
   }
 }

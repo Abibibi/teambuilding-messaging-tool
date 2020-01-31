@@ -31,7 +31,7 @@
 import Header from '@/components/Header.vue'
 import Field from '@/components/Field.vue'
 import Footer from '@/components/Footer.vue'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -51,6 +51,14 @@ export default {
     ...mapState([
       'spaceMembers'
     ])
+  },
+  methods: {
+    ...mapActions([
+      'catchOneSpaceMembers'
+    ])
+  },
+  mounted () {
+    this.catchOneSpaceMembers()
   }
 }
 </script>

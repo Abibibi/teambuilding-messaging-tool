@@ -108,5 +108,9 @@ export default {
 
   removeAlreadyJoinedSpace: ({ commit }) => {
     commit('alreadyJoinedSpaceRemoved')
+  },
+
+  tryToJoinBackToFalse: ({ commit }) => {
+    commit('tryToJoinFalseAfterConfirmingJoiningSpace')
   }
 }

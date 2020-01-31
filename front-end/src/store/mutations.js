@@ -89,7 +89,19 @@ export default {
     state.tryToJoin = true
   },
 
+  tryToJoinFalseAfterConfirmingJoiningSpace: (state) => {
+    state.tryToJoin = false
+  },
+
   alreadyJoinedSpaceRemoved: (state) => {
     state.spaceToJoin = ''
+  },
+
+  goingToOneSpacePage: (state) => {
+    state.space = true
+  },
+
+  leavingOneSpacePageWhileLogged: (state) => {
+    state.space = false
   }
 }

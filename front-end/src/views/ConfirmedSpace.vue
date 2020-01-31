@@ -13,7 +13,7 @@
 import Header from '@/components/Header.vue'
 import JoinedSpace from '@/components/JoinedSpace.vue'
 import Footer from '@/components/Footer.vue'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -28,9 +28,16 @@ export default {
       'joiningWhileUnlogged'
     ])
   },
+  methods: {
+    ...mapActions([
+      'tryToJoinBackToFalse'
+    ])
+  },
   mounted () {
     document.title = 'Confirmation d\'adhésion - Gratitude'
-    // todo: code action that turns vuex state property "tryToJoin" to false
+  },
+  beforeDestroy () {
+    this.tryToJoinBackToFalse()
   }
 }
 </script>

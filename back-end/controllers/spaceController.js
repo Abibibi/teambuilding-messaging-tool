@@ -13,16 +13,27 @@ const addSpace = async (req, res) => {
     const picture = url + '/public/' + req.file.filename;
     
     await promisePool.query(
-        `INSERT INTO spaces (name, picture, creator_id)
+        `INSERT
+            INTO spaces
+                (name, picture, creator_id)
         VALUES (?, ?, ?)`,
         [name, picture, req.session.user.id]
     );
     
     // to-do: add the picture alt manually
     const insertedSpace = await promisePool.query(
-        `SELECT id, name, picture, pictureAlt, creator_id FROM spaces
-        where name = ?
-        AND creator_id = ?`,
+        `SELECT
+            id,
+            name,
+            picture,
+            pictureAlt,
+            creator_id
+        FROM
+            spaces
+        WHERE
+            name = ?
+        AND
+            creator_id = ?`,
         [name, req.session.user.id]
     );
     
@@ -32,7 +43,9 @@ const addSpace = async (req, res) => {
     // since many users may be in one space - and one user
     // may belong to multiple spaces)
     await promisePool.query(
-        `INSERT INTO users_have_spaces (users_id, spaces_id)
+        `INSERT
+            INTO users_have_spaces
+                (users_id, spaces_id)
         VALUES (?, ?)`,
         [req.session.user.id, insertedSpace[0][0].id]
     );
@@ -42,7 +55,11 @@ const addSpace = async (req, res) => {
 
 const allSpaces = async (req, res) => {
     [results] = await promisePool.query(
-        `SELECT id, name FROM spaces`
+        `SELECT
+            id,
+            name
+        FROM
+            spaces`
     )
     
     res.json(results)
@@ -50,11 +67,19 @@ const allSpaces = async (req, res) => {
 
 const oneUserSpaces = async (req, res) => {
     [results] = await promisePool.query(
-        `SELECT s.id, s.name, s.picture, s.pictureAlt
-        FROM spaces as s
-        INNER JOIN users_have_spaces as us
-        on s.id = us.spaces_id
-        WHERE us.users_id = ?`,
+        `SELECT
+            s.id,
+            s.name,
+            s.picture,
+            s.pictureAlt
+        FROM
+            spaces as s
+        INNER JOIN
+            users_have_spaces as us
+        ON
+            s.id = us.spaces_id
+        WHERE
+            us.users_id = ?`,
         [req.session.user.id]
     )
     
@@ -63,11 +88,20 @@ const oneUserSpaces = async (req, res) => {
 
 const findSpaceToJoin = async (req, res) => {
     [results] = await promisePool.query(
-        `SELECT s.id, s.name, s.picture, s.pictureAlt, u.firstname spaceCreator
-        FROM users as u
-        LEFT JOIN spaces as s
-        ON u.id = s.creator_id
-        WHERE s.name = ?`,
+        `SELECT
+            s.id,
+            s.name,
+            s.picture,
+            s.pictureAlt,
+            u.firstname spaceCreator
+        FROM
+            users as u
+        LEFT JOIN
+            spaces as s
+        ON
+            u.id = s.creator_id
+        WHERE
+            s.name = ?`,
         [req.params.spaceName]
     )
 
@@ -76,7 +110,9 @@ const findSpaceToJoin = async (req, res) => {
 
 const joiningNewSpace = async (req, res) => {
     await promisePool.query(
-        `INSERT INTO users_have_spaces (users_id, spaces_id)
+        `INSERT
+            INTO users_have_spaces
+                (users_id, spaces_id)
         VALUES (?, ?)`,
         [req.session.user.id, req.params.spaceId]
     )
@@ -88,13 +124,22 @@ const oneSpaceMembers = async (req, res) => {
     // to get all members from one space
     // but the session connected member
     [results] = await promisePool.query(
-        `SELECT u.id, u.firstname
-        FROM users as u
-        INNER JOIN users_have_spaces as us
-        ON u.id = us.users_id
-        WHERE us.spaces_id = (SELECT id FROM spaces
-        WHERE spaces.name = ?)
-        AND NOT us.users_id = ?`,
+        `SELECT
+            u.id,
+            u.firstname
+        FROM
+            users as u
+        INNER JOIN
+            users_have_spaces as us
+        ON
+            u.id = us.users_id
+        WHERE
+            us.spaces_id = (
+                SELECT id FROM spaces
+                WHERE spaces.name = ?
+            )
+        AND NOT
+            us.users_id = ?`,
         [req.params.spaceName, req.session.user.id]
     );
 

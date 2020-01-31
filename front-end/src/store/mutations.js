@@ -103,5 +103,13 @@ export default {
 
   leavingOneSpacePageWhileLogged: (state) => {
     state.space = false
+  },
+
+  oneSpaceMembersReceived: (state, payload) => {
+    state.spaceMembers = payload
+  },
+
+  messageSent: (state) => {
+    state.sendMessageSuccess = true
   }
 }

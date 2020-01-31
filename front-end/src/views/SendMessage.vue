@@ -3,7 +3,7 @@
     <Header />
       <div class="content-container content-container-logged content-container-logged-middle">
         <h1 class="content-container-loggedtitle">Envoyer un message</h1>
-        <form @submit.prevent="handleSubmit" class="form-form send-form">
+        <form @submit.prevent="handleSubmit" class="form-form send-form" ref="form">
           <Field
             inputType="text"
             nameIdForText="member"
@@ -20,6 +20,7 @@
             <textarea v-model="message" class="send-form-textarea-textarea" required></textarea>
           </div>
           <button class="button send-form-button">Envoyer</button>
+          <p class="form-submission form-submission-success" v-if="sendMessageSuccess">Message envoyé</p>
         </form>
       </div>
     <Footer />
@@ -49,7 +50,8 @@ export default {
   },
   computed: {
     ...mapState([
-      'spaceMembers'
+      'spaceMembers',
+      'sendMessageSuccess'
     ])
   },
   methods: {
@@ -57,6 +59,14 @@ export default {
       'catchOneSpaceMembers',
       'sendMessage'
     ]),
+
+    scrollToEnd () {
+      // to make sure form is visible after submission.
+      // after submission, status of the submission result is displayed
+      // status is part of the form, so for it to be visible, scrollIntoView function will scroll to end of page
+      const form = this.$refs.form
+      form.scrollIntoView()
+    },
 
     handleSubmit () {
       const messageInfo = {
@@ -66,7 +76,7 @@ export default {
 
       this.sendMessage(messageInfo)
 
-      console.log(messageInfo)
+      this.scrollToEnd()
     }
   },
   mounted () {

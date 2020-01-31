@@ -16,7 +16,8 @@ export default {
   tryToJoin: false,
   sessionUserSpaces: [],
   space: false,
+  spaceMembers: [],
+  sendMessageSuccess: false,
   messagesReceived: false,
-  messagesSent: false,
-  spaceMembers: []
+  messagesSent: false
 }

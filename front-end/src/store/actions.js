@@ -134,5 +134,8 @@ export default {
     messageInfo.spaceName = spaceName
 
     axios.post(`http://localhost:5000/messages/addMessage`, messageInfo, { withCredentials: true })
+      .then(() => {
+        commit('messageSent')
+      })
   }
 }

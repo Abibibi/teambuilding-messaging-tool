@@ -107,5 +107,9 @@ export default {
 
   oneSpaceMembersReceived: (state, payload) => {
     state.spaceMembers = payload
+  },
+
+  messageSent: (state) => {
+    state.sendMessageSuccess = true
   }
 }

@@ -4,9 +4,13 @@
       <div class="content-container content-container-logged">
         <h1 v-if="messagesReceived" class="content-container-loggedtitle">Messages reçus</h1>
         <h1 v-else-if="messagesSent" class="content-container-loggedtitle">Messages envoyés</h1>
-        <div class="messages">
-          <Message />
-          <Message />
+        <div v-if="messagesReceived" class="messages">
+          <Message
+            v-for="({ id, content, date }) in messagesContentReceived"
+            :key="id"
+            :receivedMessageContent="content"
+            :receivedMessageDate="date"
+          />
         </div>
       </div>
     <Footer />
@@ -29,6 +33,7 @@ export default {
   computed: {
     ...mapState([
       'messagesReceived',
+      'messagesContentReceived',
       'messagesSent'
     ])
   },

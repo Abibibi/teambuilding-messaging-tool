@@ -79,7 +79,8 @@ const routes = [
     name: 'received-messages',
     meta: {
       requiresAuth: true,
-      requiresSpaces: true
+      requiresSpaces: true,
+      requiresOneSpace: true
     },
     component: ReceivedMessages
   },
@@ -88,7 +89,8 @@ const routes = [
     name: 'sent-messages',
     meta: {
       requiresAuth: true,
-      requiresSpaces: true
+      requiresSpaces: true,
+      requiresOneSpace: true
     },
     component: SentMessages
   },
@@ -97,7 +99,8 @@ const routes = [
     name: 'send-message',
     meta: {
       requiresAuth: true,
-      requiresSpaces: true
+      requiresSpaces: true,
+      requiresOneSpace: true
     },
     component: SendMessage
   },
@@ -137,7 +140,7 @@ router.beforeEach((to, from, next) => {
         next({
           name: 'my-spaces'
         })
-      } if (store.state.logged && to.matched.some(record => record.meta.requiresSpaces)) {
+      } else if (store.state.logged && to.matched.some(record => record.meta.requiresSpaces)) {
         const spaces = store.state.spaces
         console.log(spaces)
         console.log(to.params.espace)
@@ -149,7 +152,15 @@ router.beforeEach((to, from, next) => {
         console.log(oneSpace)
 
         if (oneSpace) {
-          next()
+          if (to.matched.some(record => record.meta.requiresOneSpace)) {
+            // to display the proper navbar
+            // (see Header.vue file)
+            store.commit('goingToOneSpacePage')
+            next()
+          } else {
+            store.commit('leavingOneSpacePageWhileLogged')
+            next()
+          }
           console.log('onespacename exists')
         } else {
           // if the space name param in the URL

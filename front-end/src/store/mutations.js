@@ -95,5 +95,13 @@ export default {
 
   alreadyJoinedSpaceRemoved: (state) => {
     state.spaceToJoin = ''
+  },
+
+  goingToOneSpacePage: (state) => {
+    state.space = true
+  },
+
+  leavingOneSpacePageWhileLogged: (state) => {
+    state.space = false
   }
 }

@@ -6,9 +6,12 @@ const authMiddleware = require('../utils/authMiddleware');
 
 // Controller
 const {
-    addMessage
+    addMessage,
+    receivedMessages
 } = require('../controllers/messageController');
 
 router.post('/addMessage', authMiddleware, addMessage);
+
+router.get('/receivedMessages', authMiddleware, receivedMessages);
 
 module.exports = router;

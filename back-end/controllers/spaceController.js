@@ -87,7 +87,7 @@ const joiningNewSpace = async (req, res) => {
 const oneSpaceMembers = async (req, res) => {
     // to get all members from one space
     // but the session connected member
-    const [results] = await promisePool.query(
+    [results] = await promisePool.query(
         `SELECT u.id, u.firstname
         FROM users as u
         INNER JOIN users_have_spaces as us

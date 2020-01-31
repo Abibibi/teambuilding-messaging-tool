@@ -7,11 +7,14 @@ const authMiddleware = require('../utils/authMiddleware');
 // Controller
 const {
     addMessage,
-    receivedMessages
+    receivedMessages,
+    sentMessages
 } = require('../controllers/messageController');
 
 router.post('/addMessage', authMiddleware, addMessage);
 
 router.get('/receivedMessages/:spaceName', authMiddleware, receivedMessages);
+
+router.get('/sentMessages/:spaceName', authMiddleware, sentMessages);
 
 module.exports = router;

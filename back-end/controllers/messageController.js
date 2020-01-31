@@ -40,7 +40,31 @@ const receivedMessages = async (req, res) => {
                 JOIN users as u
                     ON m.receiver_id = u.id
         WHERE
-            u.id = ?
+            m.receiver_id = ?
+        AND
+            s.name = ?`,
+        [req.session.user.id, req.params.spaceName]
+    );
+
+    res.json(results)
+};
+
+const sentMessages = async (req, res) => {
+    const [results] = await promisePool.query(
+        `SELECT
+            m.id,
+            m.content,
+            m.created_At as date,
+            s.name as spaceName,
+            u.firstname as receiver
+        FROM
+            messages as m
+                JOIN spaces as s
+                    ON m.spaces_id = s.id
+                JOIN users as u
+                    ON m.receiver_id = u.id
+        WHERE
+            m.sender_id = ?
         AND
             s.name = ?`,
         [req.session.user.id, req.params.spaceName]
@@ -49,7 +73,9 @@ const receivedMessages = async (req, res) => {
     res.json(results)
 }
 
+
 module.exports = {
     addMessage,
-    receivedMessages
+    receivedMessages,
+    sentMessages
 }

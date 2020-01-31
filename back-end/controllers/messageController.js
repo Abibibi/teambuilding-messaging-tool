@@ -24,6 +24,28 @@ const addMessage = async (req, res) => {
     res.json('Le nouveau message a bien été ajouté à la base de données.');
 };
 
+const receivedMessages = async (req, res) => {
+    const [results] = await promisePool.query(
+        `SELECT
+            m.id,
+            m.content,
+            s.name,
+            u.firstname as receiver
+        FROM
+            messages as m
+                JOIN spaces as s
+                    ON m.spaces_id = s.id
+                JOIN users as u
+                    ON m.receiver_id = u.id
+        WHERE
+            u.id = ?`,
+        [req.session.user.id]
+    );
+
+    res.json(results)
+}
+
 module.exports = {
-    addMessage
+    addMessage,
+    receivedMessages
 }

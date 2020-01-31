@@ -115,12 +115,13 @@ export default {
 
   messagesReceivedDisplayed: (state, payload) => {
     state.messagesReceived = true
-    state.messagesContentReceived = payload
+    state.receivedMessagesContent = payload
     state.messagesSent = false
   },
 
-  messagesSentDisplayed: (state) => {
+  messagesSentDisplayed: (state, payload) => {
     state.messagesSent = true
+    state.sentMessagesContent = payload
     state.messagesReceived = false
   }
 }

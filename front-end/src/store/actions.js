@@ -139,22 +139,25 @@ export default {
       })
   },
 
-  messagesType: ({ commit, state }) => {
+  catchReceivedMessages: ({ commit, state }) => {
     const spaceName = state.spaces.find((oneSpace) =>
       window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
     ).name
 
-    if (window.location.pathname.includes('messages-recus')) {
-      axios.get(`http://localhost:5000/messages/receivedMessages/${spaceName}`, { withCredentials: true })
-        .then((response) => {
-          commit('messagesReceivedDisplayed', response.data)
-        })
-    } else if (window.location.pathname.includes('messages-envoyes')) {
-      commit('messagesSentDisplayed')
-    }
+    axios.get(`http://localhost:5000/messages/receivedMessages/${spaceName}`, { withCredentials: true })
+      .then((response) => {
+        commit('messagesReceivedDisplayed', response.data)
+      })
   },
 
-  catchReceivedMessages: ({ commit }) => {
+  catchSentMessages: ({ commit, state }) => {
+    const spaceName = state.spaces.find((oneSpace) =>
+      window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
+    ).name
 
+    axios.get(`http://localhost:5000/messages/sentMessages/${spaceName}`, { withCredentials: true })
+      .then((response) => {
+        commit('messagesSentDisplayed', response.data)
+      })
   }
 }

@@ -51,7 +51,8 @@ export default {
   computed: {
     ...mapState([
       'spaceMembers',
-      'sendMessageSuccess'
+      'sendMessageSuccess',
+      'spaces'
     ])
   },
   methods: {
@@ -83,6 +84,11 @@ export default {
     }
   },
   mounted () {
+    const spaceSlug = this.spaces.find((oneSpace) =>
+      window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
+    ).name
+
+    document.title = `Envoyer un message - ${spaceSlug} - Gratitude`
     this.catchOneSpaceMembers()
   }
 }

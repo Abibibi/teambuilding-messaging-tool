@@ -176,7 +176,7 @@ router.beforeEach((to, from, next) => {
           next({ name: 'not-found' })
           console.log('onespacename does not exist')
         }
-      } else if (store.state.logged && !to.matched.some(record => record.meta.requiresSpaces)) {
+      } else if (store.state.logged && !to.matched.some(record => record.meta.requiresSpaces) && to.name !== 'logout') {
         store.commit('leavingOneSpacePageWhileLogged')
 
         next()

@@ -140,6 +140,10 @@ export default {
       .catch((err) => console.log(err))
   },
 
+  leavingSendMessage: ({ commit }) => {
+    commit('messageAlreadySent')
+  },
+
   catchReceivedMessages: ({ commit, state }) => {
     const spaceName = state.spaces.find((oneSpace) =>
       window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''

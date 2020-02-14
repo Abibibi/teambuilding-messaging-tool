@@ -7,7 +7,8 @@ const authMiddleware = require('../utils/authMiddleware');
 const {
     isAuth,
     signUp,
-    signIn
+    signIn,
+    signOut
 } = require('../controllers/userController');
 
 // to check if user is already logged when arriving on page
@@ -18,6 +19,9 @@ router.post('/add', signUp);
 
 // to sign in
 router.post('/login', signIn);
+
+// to sign out
+router.get('/logout', signOut);
 
 // router exported to create related API in app.js which will be made available to the client 
 module.exports = router;

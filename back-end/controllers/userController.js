@@ -85,9 +85,17 @@ const signIn = async (req, res) => {
   
 };
 
+const signOut = (req, res) => {
+  if (req.session && req.session.user) {
+    req.session.destroy();
+    res.json('L\'utilisateur est bien déconnecté.');
+  }  
+};
+
 
 module.exports = {
   isAuth,
   signUp,
-  signIn
+  signIn,
+  signOut
 }

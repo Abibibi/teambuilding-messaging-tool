@@ -6,8 +6,8 @@
       <router-link to="/inscription" v-show="!logged" class="header-nav-a header-nav-a-margin">S'inscrire</router-link>
       <router-link to="/connexion" v-show="!logged" class="header-nav-a">S'identifier</router-link>
       <router-link to="/mes-espaces" v-show="logged && !space" class="header-nav-a header-nav-a-margin">Mes espaces</router-link>
-      <router-link to="/creer-un-espace" v-show="logged &&!space" class="header-nav-a header-nav-a-margin">Créer un espace</router-link>
-      <router-link to="#" v-show="logged &&!space" class="header-nav-a">Déconnexion</router-link>
+      <router-link to="/creer-un-espace" v-show="logged && !space" class="header-nav-a header-nav-a-margin">Créer un espace</router-link>
+      <router-link to="/logout" v-show="logged && !space" class="header-nav-a">Déconnexion</router-link>
       <router-link :to="'/' + spaceName + '/messages-recus'" v-show="logged &&space" class="header-nav-a header-nav-a-margin">Messages reçus</router-link>
       <router-link :to="'/' + spaceName + '/messages-envoyes'" v-show="logged &&space" class="header-nav-a header-nav-a-margin">Messages envoyés</router-link>
       <router-link :to="'/' + spaceName + '/envoyer-message'" v-show="logged &&space" class="header-nav-a">Envoyer un message</router-link>
@@ -41,7 +41,10 @@ export default {
     }
   },
   mounted () {
-    this.urlSpaceName()
+    if (Object.keys(this.$route.params).length > 0) {
+      console.log(this.$route.params)
+      this.urlSpaceName()
+    }
   }
 }
 </script>

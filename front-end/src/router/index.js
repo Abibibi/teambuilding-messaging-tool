@@ -105,6 +105,10 @@ const routes = [
     component: SendMessage
   },
   {
+    path: '/logout',
+    name: 'logout'
+  },
+  {
     path: '*',
     name: 'not-found',
     component: notFound
@@ -169,6 +173,14 @@ router.beforeEach((to, from, next) => {
           next({ name: 'not-found' })
           console.log('onespacename does not exist')
         }
+      } else if (to.name === 'logout') {
+        axios.get('http://localhost:5000/users/logout', { withCredentials: true })
+          .then((response) => {
+            console.log(response)
+            store.commit('notAuthenticated')
+            next({ name: 'home' })
+          })
+          .catch((err) => console.log(err))
       } else {
         next()
       }

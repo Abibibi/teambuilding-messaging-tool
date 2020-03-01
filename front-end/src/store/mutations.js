@@ -113,6 +113,10 @@ export default {
     state.sendMessageSuccess = true
   },
 
+  messageAlreadySent: (state) => {
+    state.sendMessageSuccess = false
+  },
+
   messagesReceivedDisplayed: (state, payload) => {
     state.messagesReceived = true
     state.receivedMessagesContent = payload

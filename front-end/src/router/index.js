@@ -105,6 +105,13 @@ const routes = [
     component: SendMessage
   },
   {
+    path: '/logout',
+    name: 'logout',
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '*',
     name: 'not-found',
     component: notFound
@@ -169,6 +176,18 @@ router.beforeEach((to, from, next) => {
           next({ name: 'not-found' })
           console.log('onespacename does not exist')
         }
+      } else if (store.state.logged && !to.matched.some(record => record.meta.requiresSpaces) && to.name !== 'logout') {
+        store.commit('leavingOneSpacePageWhileLogged')
+
+        next()
+      } else if (to.name === 'logout') {
+        axios.get('http://localhost:5000/users/logout', { withCredentials: true })
+          .then((response) => {
+            console.log(response)
+            store.commit('notAuthenticated')
+            next({ name: 'home' })
+          })
+          .catch((err) => console.log(err))
       } else {
         next()
       }

@@ -58,7 +58,8 @@ export default {
   methods: {
     ...mapActions([
       'catchOneSpaceMembers',
-      'sendMessage'
+      'sendMessage',
+      'leavingSendMessage'
     ]),
 
     scrollToEnd () {
@@ -90,6 +91,10 @@ export default {
 
     document.title = `Envoyer un message - ${spaceSlug} - Gratitude`
     this.catchOneSpaceMembers()
+  },
+
+  beforeDestroy () {
+    this.leavingSendMessage()
   }
 }
 </script>

@@ -137,6 +137,11 @@ export default {
       .then(() => {
         commit('messageSent')
       })
+      .catch((err) => console.log(err))
+  },
+
+  leavingSendMessage: ({ commit }) => {
+    commit('messageAlreadySent')
   },
 
   catchReceivedMessages: ({ commit, state }) => {
@@ -148,6 +153,7 @@ export default {
       .then((response) => {
         commit('messagesReceivedDisplayed', response.data)
       })
+      .catch((err) => console.log(err))
   },
 
   catchSentMessages: ({ commit, state }) => {
@@ -159,5 +165,6 @@ export default {
       .then((response) => {
         commit('messagesSentDisplayed', response.data)
       })
+      .catch((err) => console.log(err))
   }
 }

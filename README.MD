@@ -1,7 +1,9 @@
 Gratitude
 ====================
 
-Objectif de l'application
+Purpose
 --------------------
 
-Gratitude est une application qui permet à des collègues de s'adresser des messages de reconnaissance de façon anonyme.
+Gratitude is an app where coworkers can send each other thankful and encouraging messages anonymously. 0% self-interested flattery, 100% honesty
+
+

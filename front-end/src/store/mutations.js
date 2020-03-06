@@ -51,6 +51,15 @@ export default {
   newSpaceAdded: (state, payload) => {
     state.spaces = [...state.spaces, { id: payload.id, name: payload.name }]
     state.createdSpace = payload
+    state.spaceAlreadyThere = false
+  },
+
+  spaceAlreadyExisting: (state) => {
+    state.spaceAlreadyThere = true
+  },
+
+  spaceAlreadyThereRemoved: (state) => {
+    state.spaceAlreadyThere = false
   },
 
   previouslySubmittedSpaceRemoved: (state) => {
@@ -97,12 +106,14 @@ export default {
     state.spaceToJoin = ''
   },
 
-  goingToOneSpacePage: (state) => {
+  goingToOneSpacePage: (state, payload) => {
     state.space = true
+    state.currentSpace = payload
   },
 
   leavingOneSpacePageWhileLogged: (state) => {
     state.space = false
+    state.currentSpace = ''
   },
 
   oneSpaceMembersReceived: (state, payload) => {

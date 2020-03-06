@@ -2,7 +2,7 @@
   <div>
     <Header />
       <div class="content-container content-container-logged">
-        <h1 class="content-container-loggedtitle">Messages envoyés</h1>
+        <h1 class="content-container-loggedtitle">Messages envoyés - Espace {{ currentSpace }}</h1>
         <div class="messages">
           <Message
             v-for="({ id, content, date, receiver }) in sentMessagesFormattedDate"
@@ -36,7 +36,8 @@ export default {
   },
   computed: {
     ...mapState([
-      'spaces'
+      'spaces',
+      'currentSpace'
     ]),
 
     ...mapGetters([
@@ -51,11 +52,7 @@ export default {
   mounted () {
     this.catchSentMessages()
 
-    const spaceSlug = this.spaces.find((oneSpace) =>
-      window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
-    ).name
-
-    document.title = `Messages reçus - ${spaceSlug} - Gratitude`
+    document.title = `Messages reçus - ${this.currentSpace} - Gratitude`
   }
 }
 </script>

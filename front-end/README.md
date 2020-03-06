@@ -1,4 +1,4 @@
-# front-end
+# teambuilding-messaging-tool_frontend
 
 ## Project setup
 ```

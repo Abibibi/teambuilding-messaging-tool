@@ -1,9 +1,11 @@
+/* eslint-disable */
+
 import axios from 'axios'
 import router from '@/router'
 
 export default {
   registering: ({ commit }, userInfo) => {
-    axios.post('http://localhost:5000/users/add', userInfo, { withCredentials: true })
+    axios.post(`${process.env.VUE_APP_API}/users/add`, userInfo, { withCredentials: true })
       .then(() => {
         commit('registerDone')
       })
@@ -16,7 +18,7 @@ export default {
   },
 
   login: ({ commit, state, dispatch }, userInfo) => {
-    axios.post('http://localhost:5000/users/login', userInfo, { withCredentials: true })
+    axios.post(`${process.env.VUE_APP_API}/users/login`, userInfo, { withCredentials: true })
       .then((response) => {
         console.log(response)
         commit('loginDone', response.data)
@@ -25,7 +27,7 @@ export default {
           dispatch('joiningOneSpace').then(() => {
             commit('spaceJoinedAfterLogin', state.spaceToJoin)
           })
-          router.push(`/confirmation-adhesion/${state.spaceToJoin.name}`)
+          router.push(`/confirmation-adhesion/${state.spaceToJoin.name.toLowerCase()}`)
         } else {
           router.push('/mes-espaces')
         }
@@ -48,7 +50,7 @@ export default {
       withCredentials: true
     }
 
-    axios.post('http://localhost:5000/spaces/addSpace', spaceInfo, config)
+    axios.post(`${process.env.VUE_APP_API}/spaces/addSpace`, spaceInfo, config)
       .then((response) => {
         const sentSpace = response.data[0][0]
 
@@ -62,15 +64,24 @@ export default {
 
         commit('newSpaceAdded', spaceToAdd)
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        if(err.response.data.alreadyInDB) {
+          commit('spaceAlreadyExisting');
+        }
+        console.log(err.response.data.alreadyInDB)
+      })
   },
 
   removePreviouslySubmittedSpace: ({ commit }) => {
     commit('previouslySubmittedSpaceRemoved')
   },
 
+  removePreviouslyAlreadyExistingSpace: ({ commit }) => {
+    commit('spaceAlreadyThereRemoved')
+  },
+
   catchSessionUserSpaces: ({ commit }) => {
-    axios.get('http://localhost:5000/spaces/oneUserSpaces', { withCredentials: true })
+    axios.get(`${process.env.VUE_APP_API}/spaces/oneUserSpaces`, { withCredentials: true })
       .then((response) => {
         commit('connectedUserSpacesReceived', response.data)
       })
@@ -79,11 +90,11 @@ export default {
 
   catchSpaceToJoin: ({ commit, state }) => {
     const spaceName = state.spaces.find((oneSpace) =>
-      window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
+      window.location.pathname.includes(oneSpace.name.toLowerCase()) ? oneSpace.name : ''
     ).name
 
     console.log(spaceName)
-    axios.get(`http://localhost:5000/spaces/spaceToJoin/${spaceName}`, { withCredentials: true })
+    axios.get(`${process.env.VUE_APP_API}/spaces/spaceToJoin/${spaceName}`, { withCredentials: true })
       .then((response) => {
         commit('spaceAboutToJoin', response.data)
       })
@@ -103,7 +114,7 @@ export default {
   joiningOneSpace: ({ state }) => {
     const spaceId = state.spaceToJoin.id
 
-    axios.get(`http://localhost:5000/spaces/spaceNewlyJoined/${spaceId}`, { withCredentials: true })
+    axios.get(`${process.env.VUE_APP_API}/spaces/spaceNewlyJoined/${spaceId}`, { withCredentials: true })
   },
 
   removeAlreadyJoinedSpace: ({ commit }) => {
@@ -115,11 +126,7 @@ export default {
   },
 
   catchOneSpaceMembers: ({ commit, state }) => {
-    const spaceName = state.spaces.find((oneSpace) =>
-      window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
-    ).name
-
-    axios.get(`http://localhost:5000/spaces/oneSpaceMembers/${spaceName}`, { withCredentials: true })
+    axios.get(`${process.env.VUE_APP_API}/spaces/oneSpaceMembers/${state.currentSpace}`, { withCredentials: true })
       .then((response) => {
         commit('oneSpaceMembersReceived', response.data)
       })
@@ -127,13 +134,9 @@ export default {
   },
 
   sendMessage: ({ commit, state }, messageInfo) => {
-    const spaceName = state.spaces.find((oneSpace) =>
-      window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
-    ).name
+    messageInfo.spaceName = state.currentSpace
 
-    messageInfo.spaceName = spaceName
-
-    axios.post(`http://localhost:5000/messages/addMessage`, messageInfo, { withCredentials: true })
+    axios.post(`${process.env.VUE_APP_API}/messages/addMessage`, messageInfo, { withCredentials: true })
       .then(() => {
         commit('messageSent')
       })
@@ -145,11 +148,7 @@ export default {
   },
 
   catchReceivedMessages: ({ commit, state }) => {
-    const spaceName = state.spaces.find((oneSpace) =>
-      window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
-    ).name
-
-    axios.get(`http://localhost:5000/messages/receivedMessages/${spaceName}`, { withCredentials: true })
+    axios.get(`${process.env.VUE_APP_API}/messages/receivedMessages/${state.currentSpace}`, { withCredentials: true })
       .then((response) => {
         commit('messagesReceivedDisplayed', response.data)
       })
@@ -157,11 +156,7 @@ export default {
   },
 
   catchSentMessages: ({ commit, state }) => {
-    const spaceName = state.spaces.find((oneSpace) =>
-      window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
-    ).name
-
-    axios.get(`http://localhost:5000/messages/sentMessages/${spaceName}`, { withCredentials: true })
+    axios.get(`${process.env.VUE_APP_API}/messages/sentMessages/${state.currentSpace}`, { withCredentials: true })
       .then((response) => {
         commit('messagesSentDisplayed', response.data)
       })

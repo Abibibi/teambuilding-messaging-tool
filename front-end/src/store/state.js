@@ -9,6 +9,7 @@ export default {
   logged: false,
   loaded: false,
   createdSpace: '',
+  spaceAlreadyThere: false,
   spaces: [],
   spaceToJoin: '',
   joinedSpace: false,

@@ -7,9 +7,27 @@ const promisePool = pool.promise();
 
 // to add a new space
 const addSpace = async (req, res) => {
-    const url = req.protocol + '://' + req.get('host');
+    const url = process.env.HTTP_PROTOCOL + '://' + req.get('host');
 
     const name = req.body.name;
+
+    [nameAlreadyInDB] = await promisePool.query(
+        `SELECT
+            name
+        FROM
+            spaces
+        WHERE
+            name = ?
+        `,
+        [name]
+    );
+    console.log(name)
+    console.log(nameAlreadyInDB)
+
+    if (nameAlreadyInDB[0]) {
+        return res.status(400).send({ alreadyInDB: 'Ce nom d\'espace existe déjà.' });
+    }
+
     const picture = url + '/public/' + req.file.filename;
     
     await promisePool.query(
@@ -142,7 +160,8 @@ const oneSpaceMembers = async (req, res) => {
             us.users_id = ?`,
         [req.params.spaceName, req.session.user.id]
     );
-
+    
+    console.log(results);
     res.json(results);
 }
 

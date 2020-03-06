@@ -2,49 +2,50 @@
 
     &-form
         @include responsive(phone)
-            margin-top: .5rem
-
+            margin-top: 3.7vh
         &-input
             @include responsive(phone)
-                width: 17rem
+                width: 61vw
         
             @include responsive(tab-land)
-                width: 49rem
+                width: 37vw
 
         &-textarea
             text-align: left
 
             &-title
                 @include responsive(phone)
-                    font-size: 1.1rem
+                    font-size: 2.7vh
                 
                 @include responsive(tab-land)
-                    font-size: 1.3rem
+                    font-size: 3vh
 
             &-textarea
                 @include responsive(phone)
                     border: none
-                    border-radius: .7rem
-                    padding: .6rem
-                    width: 16rem
-                    height: 10rem
+                    border-radius: 2.2vh
+                    padding: 1.8vh
+                    width: 59vw
+                    height: 25vh
                     resize: none
                     outline: none
                     overflow: auto
 
                 @include responsive(tab-land)
-                    width: 48rem
-                    padding: .9rem
+                    width: 35vw
+                    padding: 2.5vh
     
         &-button
             @include responsive(phone)
-                border-radius: 1.3rem
-                margin: 1.5rem 0
-                width: 7rem
-                height: 2.5rem
-                font-size: 1rem
+                border-radius: 3vh
+                margin: 4vh 0
+                width: 33vw
+                height: 9vh
+                font-size: 2.5vh
+            
+            @include responsive(tab-port)
+                width: 20vw
                 
             @include responsive(tab-land)
-                margin: 2rem 0
-                width: 8rem
-                height: 3rem
+                margin: 5vh 0
+                width: 15vw

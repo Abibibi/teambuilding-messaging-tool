@@ -2,7 +2,7 @@
   <div>
     <Header />
       <div class="content-container content-container-logged content-container-logged-middle">
-        <h1 class="content-container-loggedtitle">Envoyer un message</h1>
+        <h1 class="content-container-loggedtitle">Envoyer un message - Espace {{ currentSpace }}</h1>
         <form @submit.prevent="handleSubmit" class="form-form send-form" ref="form">
           <Field
             inputType="text"
@@ -17,7 +17,7 @@
           />
           <div class="send-form-textarea">
             <h2 class="send-form-textarea-title">Votre message :</h2>
-            <textarea v-model="message" class="send-form-textarea-textarea" required></textarea>
+            <textarea v-model="message" class="send-form-textarea-textarea" @focus="leavingSendMessage" required></textarea>
           </div>
           <button class="button send-form-button">Envoyer</button>
           <p class="form-submission form-submission-success" v-if="sendMessageSuccess">Message envoyé</p>
@@ -52,7 +52,8 @@ export default {
     ...mapState([
       'spaceMembers',
       'sendMessageSuccess',
-      'spaces'
+      'spaces',
+      'currentSpace'
     ])
   },
   methods: {
@@ -85,11 +86,7 @@ export default {
     }
   },
   mounted () {
-    const spaceSlug = this.spaces.find((oneSpace) =>
-      window.location.pathname.includes(oneSpace.name) ? oneSpace.name : ''
-    ).name
-
-    document.title = `Envoyer un message - ${spaceSlug} - Gratitude`
+    document.title = `Envoyer un message - ${this.currentSpace} - Gratitude`
     this.catchOneSpaceMembers()
   },
 

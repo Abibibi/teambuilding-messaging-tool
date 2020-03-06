@@ -1,20 +1,31 @@
 .spacecard
     @include responsive(phone)
-        width: 12rem
-        height: 11rem
+        width: 15rem
+        height: 12rem
         background-color: $darkContentGray
-        border-radius: 1.2rem
-        margin: 0 0 1.7rem
+        border-radius: 2.8vh
+        margin: 3.4vh 0
         display: flex
         flex-direction: column
         cursor: pointer
+        position: relative
 
     @include responsive(tab-land)
-        margin: 1rem 1.2rem
+        margin: 2.5vh 3vw
+        width: 12rem
+        height: 9rem
+
+    @include responsive(big-desktop)
+        width: 17rem
+        height: 14rem
+    
+    @include responsive(very-big-desktop)
+        width: 23rem
+        height: 20rem
     
     &:active
         position: relative
-        top: .2rem
+        top: .5vh
     
     &:hover
         background-color: $grayHover
@@ -22,17 +33,42 @@
     &-link
         text-decoration: none
         color: $white
+        width: 100%
+        height: 100%
 
     &-spaceimage
-        max-width: 100%
-        max-height: 100%
-        border-radius: 1.2rem 1.2rem 0 0
+        width: 100%
+        height: 74%
+        border-radius: 2.8vh 2.8vh 0 0
+        display: flex
+        align-items: center
+        justify-content: center
+        overflow: hidden
 
-        &:hover
-            opacity: .5
+        &-container
+            width: 100%
+            height: 100%
+            display: flex
+            align-items: center
+            justify-content: center
+            overflow: hidden
+            background-color: #000000
+            
+    &:hover
+        opacity: .5
 
     &-spacename
         @include responsive(phone)
             text-align: center
             text-decoration: none
-            margin: .3rem 0
+            margin: 0
+            bottom: 2.2vh
+            height: 26%
+            display: flex
+            align-items: center
+            justify-content: center
+            
+#app .spacecard
+    @include responsive(ipad-pro)
+        width: 19rem
+        height: 16rem

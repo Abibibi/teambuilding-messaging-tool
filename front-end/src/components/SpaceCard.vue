@@ -1,7 +1,11 @@
 <template>
   <div class="spacecard">
     <router-link class="spacecard-link" :to="spaceURL">
-      <img class="spacecard-spaceimage" :src="picture" :alt="pictureAlt" >
+      <div class="spacecard-spaceimage">
+        <div class="spacecard-spaceimage-container">
+          <img class="spacecard-spaceimage-container-content" :src="picture" :alt="pictureAlt" >
+        </div>
+      </div>
       <p class="spacecard-spacename">{{ name }}</p>
     </router-link>
   </div>
@@ -19,7 +23,7 @@ export default {
       name: this.spaceName,
       picture: this.spacePicture,
       pictureAlt: this.spacePictureAlt,
-      spaceURL: `/${this.spaceName}/envoyer-message`
+      spaceURL: `/${this.spaceName.toLowerCase()}/envoyer-message`
     }
   }
 }

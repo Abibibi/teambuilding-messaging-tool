@@ -2,12 +2,12 @@
 
     &-title
         @include responsive(phone)
-            font-size: 1.1em
-            margin: 2rem 0 1rem
+            font-size: 4.2vh
+            margin: 8vh 0 2.5vh
             
         @include responsive(tab-land)
-            font-size: 1.4em
-            margin: 3rem 0 1.5rem
+            font-size: 4vh
+            margin: 7.5vh 0 4vh
 
     &-form
         display: flex
@@ -16,27 +16,33 @@
 
     &-question
         @include responsive(phone)
-            font-size: .6em
-            margin-bottom: 1.5rem
+            font-size: 2.4vh
+            margin-bottom: 4vh
             
         @include responsive(tab-land)
-            font-size: .7em 
+            font-size: 2.1vh
 
     &-indication
         @include responsive(phone)
-            font-size: .7rem
-            width: 13.7rem
+            font-size: 2.1vh
+            width: 60vw
             margin: 0
             text-align: left
+
+        @include responsive(tab-port)
+            width: 43vw
+
+        @include responsive(tab-land)
+            width: 23vw
 
         &-error
             color: $errorRed
     
     &-submission
-        padding: 1rem
-        margin: 0 0 1.3rem
-        width: 13.7rem
-        border-radius: 1.2rem
+        padding: 2.7vw
+        margin: 0 0 3vh
+        width: 24vw
+        border-radius: 2.8vh
 
         &-success
             background-color: $successGreen

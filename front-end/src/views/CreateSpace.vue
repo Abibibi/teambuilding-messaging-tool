@@ -3,7 +3,7 @@
     <Header />
       <div class="content-container content-container-logged">
         <h1 class="content-container-loggedtitle">Créer un espace</h1>
-        <form @submit.prevent="handleSubmit" class="form-form">
+        <form @submit.prevent="handleSubmit" class="form-form" >
           <Field
             inputType="text"
             nameIdForText="spaceName"
@@ -35,6 +35,9 @@
           />
           <p>Vous pouvez également inviter vos collègues à rejoindre l'espace {{ createdSpace.name }} en leur communiquant ce lien :</p>
           <router-link :to="'/accepter-espace/' + createdSpace.name" class="home-form-link-a">Espace {{ createdSpace.name }}</router-link>
+        </div>
+        <div v-if="spaceAlreadyThere" class="content-container-logged-middle">
+          <p>Ce nom d'espace existe déjà. Veuillez en choisir un autre.</p>
         </div>
       </div>
     <Footer />
@@ -71,18 +74,21 @@ export default {
 
   computed: {
     ...mapState([
-      'createdSpace'
+      'createdSpace',
+      'spaceAlreadyThere'
     ])
   },
 
   methods: {
     ...mapActions([
       'newSpace',
-      'removePreviouslySubmittedSpace'
+      'removePreviouslySubmittedSpace',
+      'removePreviouslyAlreadyExistingSpace'
     ]),
 
     async handleSubmit () {
       await this.removePreviouslySubmittedSpace()
+      await this.removePreviouslyAlreadyExistingSpace()
       // information updated by Child component (Field) through two-way data binding
       // (with v-model for space.name and "update" event for space.image)
       const { name, image } = this.space
@@ -90,8 +96,6 @@ export default {
       const formData = new FormData()
       formData.append('name', name)
       formData.append('image', image)
-
-      console.log(...formData)
 
       this.newSpace(formData)
 
@@ -103,7 +107,7 @@ export default {
 
     createdSpaceURL () {
       if (this.createdSpace) {
-        this.space.URL = `/accepter-espace/${this.createdSpace.name}`
+        this.space.URL = `/accepter-espace/${this.createdSpace.name.toLowerCase()}`
         return this.space.URL
       }
     }
@@ -111,6 +115,11 @@ export default {
 
   mounted () {
     document.title = 'Créer un espace - Gratitude'
+  },
+
+  beforeDestroy () {
+    this.removePreviouslySubmittedSpace()
+    this.removePreviouslyAlreadyExistingSpace()
   }
 }
 </script>

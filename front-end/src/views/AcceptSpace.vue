@@ -7,7 +7,7 @@
           <button class="button accept-space-button" @click="attemptJoining">Rejoindre</button>
           <JoinedSpace v-if="logged && joinedSpace" :joiningFromAcceptView="joiningFromAccept"/>
           <div v-else-if="!logged && joiningWhileUnlogged" class="content-container-logged-middle">
-            <p class="content-joining-paragraph content-joining-paragraph-top"><router-link to="/connexion" class="content-link">Connectez-vous</router-link> pour pouvoir rejoindre l'espace Bla.</p>
+            <p class="content-joining-paragraph content-joining-paragraph-top"><router-link to="/connexion" class="content-link">Connectez-vous</router-link> pour pouvoir rejoindre l'espace {{ spaceToJoin.name }}.</p>
           </div>
         </div>
       </div>
